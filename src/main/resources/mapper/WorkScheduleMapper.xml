@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="asia.lhweb.diagnosis.mapper.WorkScheduleMapper">
+
+    <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.WorkSchedule">
+            <result property="id" column="id" jdbcType="INTEGER"/>
+            <result property="counselorId" column="counselor_id" jdbcType="INTEGER"/>
+            <result property="date" column="date" jdbcType="DATE"/>
+            <result property="timeSlot" column="time_slot" jdbcType="TIME"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,counselor_id,date,
+        time_slot,status
+    </sql>
+</mapper>

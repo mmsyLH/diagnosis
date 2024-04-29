@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="asia.lhweb.diagnosis.mapper.TransactionCounselorMapper">
+
+    <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.TransactionCounselor">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="transactionId" column="transaction_id" jdbcType="VARCHAR"/>
+            <result property="counselorId" column="counselor_id" jdbcType="INTEGER"/>
+            <result property="transactionType" column="transaction_type" jdbcType="INTEGER"/>
+            <result property="money" column="money" jdbcType="DOUBLE"/>
+            <result property="transactionStatus" column="transaction_status" jdbcType="INTEGER"/>
+            <result property="payChannel" column="pay_channel" jdbcType="INTEGER"/>
+            <result property="transactionInfo" column="transaction_info" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,transaction_id,counselor_id,
+        transaction_type,money,transaction_status,
+        pay_channel,transaction_info,create_time,
+        is_delete
+    </sql>
+</mapper>

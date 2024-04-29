@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="asia.lhweb.diagnosis.mapper.SysMenuMapper">
+
+    <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.SysMenu">
+            <id property="sysMenuId" column="sys_menu_id" jdbcType="INTEGER"/>
+            <result property="menuName" column="menu_name" jdbcType="VARCHAR"/>
+            <result property="menuComponent" column="menu_component" jdbcType="VARCHAR"/>
+            <result property="menuPath" column="menu_path" jdbcType="VARCHAR"/>
+            <result property="menuIcon" column="menu_icon" jdbcType="VARCHAR"/>
+            <result property="menuStatus" column="menu_status" jdbcType="INTEGER"/>
+            <result property="menuParentId" column="menu_parent_id" jdbcType="INTEGER"/>
+            <result property="menuIsHidden" column="menu_is_hidden" jdbcType="INTEGER"/>
+            <result property="menuSort" column="menu_sort" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        sys_menu_id,menu_name,menu_component,
+        menu_path,menu_icon,menu_status,
+        menu_parent_id,menu_is_hidden,menu_sort,
+        create_time,update_time,is_delete
+    </sql>
+</mapper>

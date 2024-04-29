@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="asia.lhweb.diagnosis.mapper.SysAdminMapper">
+
+    <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.SysAdmin">
+            <id property="sysAdminId" column="sys_admin_id" jdbcType="INTEGER"/>
+            <result property="sysAccount" column="sys_account" jdbcType="VARCHAR"/>
+            <result property="sysPassword" column="sys_password" jdbcType="VARCHAR"/>
+            <result property="adminName" column="admin_name" jdbcType="VARCHAR"/>
+            <result property="adminRoleId" column="admin_role_id" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        sys_admin_id,sys_account,sys_password,
+        admin_name,admin_role_id,status,
+        phone,avatar,create_time,
+        update_time,is_delete
+    </sql>
+</mapper>

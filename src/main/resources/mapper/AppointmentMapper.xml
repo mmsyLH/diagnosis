@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="asia.lhweb.diagnosis.mapper.AppointmentMapper">
+
+    <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.Appointment">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="counselorId" column="counselor_id" jdbcType="INTEGER"/>
+            <result property="areaId" column="area_id" jdbcType="INTEGER"/>
+            <result property="appointmentDate" column="appointment_date" jdbcType="DATE"/>
+            <result property="appointmentTime" column="appointment_time" jdbcType="TIME"/>
+            <result property="appointmentDescription" column="appointment_description" jdbcType="VARCHAR"/>
+            <result property="appointmentReply" column="appointment_reply" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="price" column="price" jdbcType="DOUBLE"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,counselor_id,
+        area_id,appointment_date,appointment_time,
+        appointment_description,appointment_reply,status,
+        price,create_time,update_time,
+        is_delete
+    </sql>
+</mapper>

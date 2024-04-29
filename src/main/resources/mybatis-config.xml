@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--引入外部的配置文件-->
+    <!--<properties resource="database.properties"/>-->
+
+    <!-- 配置 MyBatis 自带的日志输出, 还可以是其它日志比如 SLF4J | LOG4J | LOG4J2 |
+        JDK_LOGGING 等 settings必须放前面-->
+    <settings>
+        <!--选项里自带的就这一个能用-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--开启自动映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <!-- 开启延迟加载开关 -->
+        <!--<setting name="lazyLoadingEnabled" value="true"/>-->
+        <!--&lt;!&ndash; 将积极加载改为消极加载（即按需加载）,默认值就是false &ndash;&gt;-->
+        <!--<setting name="aggressiveLazyLoading" value="true"/>-->
+    </settings>
+
+    <!--配置别名-->
+    <!--方式1-->
+    <!--<typeAliases>-->
+    <!--    <typeAlias alias="Monster" type="asia.lhweb.entity.Monster"/>-->
+    <!--</typeAliases>-->
+    <!--方式2-->
+    <!--<typeAliases>-->
+    <!--    <package name="asia.lhweb.entity"/>-->
+    <!--</typeAliases>-->
+
+    <!--配置多个 默认根据Id进行匹配-->
+    <!--<environments default="development">-->
+    <!--    <environment id="development">-->
+    <!--        &lt;!&ndash;配置事务管理器&ndash;&gt;-->
+    <!--        <transactionManager type="JDBC"/>-->
+    <!--        &lt;!&ndash;配置数据源：POOLED连接池mybatis自带的&ndash;&gt;-->
+    <!--        <dataSource type="POOLED">-->
+    <!--            &lt;!&ndash;<property name="driver" value="${jdbc.driver}"/>&ndash;&gt;-->
+    <!--            &lt;!&ndash;<property name="url" value="${jdbc.url}"/>&ndash;&gt;-->
+    <!--            &lt;!&ndash;<property name="username" value="${jdbc.username}"/>&ndash;&gt;-->
+    <!--            &lt;!&ndash;<property name="password" value="${jdbc.password}"/>&ndash;&gt;-->
+    <!--            &lt;!&ndash;-->
+    <!--            jdbc:mysql 协议-->
+    <!--            127.0.0.1:3306 ip+端口-->
+    <!--            mybatis 数据库名-->
+    <!--            &amp   &-->
+    <!--            useSSL=true 表示使用安全连接-->
+    <!--            useUnicode=true 防止编码错误-->
+    <!--            characterEncoding=UTF-8 防止中文乱码-->
+    <!--            &ndash;&gt;-->
+    <!--            <property name="url" value="${url}"/>-->
+    <!--            <property name="driver" value="${driverClassName}"/>-->
+    <!--            <property name="username" value="${username}"/>-->
+    <!--            <property name="password" value="${password}"/>-->
+    <!--        </dataSource>-->
+    <!--    </environment>-->
+    <!--</environments>-->
+    <!--
+    配置需要管理的mapper.xml文件
+    -->
+
+    <!--配置Mybatis分页插件拦截器插件-->
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--分页合理化-->
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+    <mappers>
+        <!--<mapper resource="mapper/UserMapper.xml"/>-->
+        <!--如果是用注解，可不用再引入xml,但是需要引入包含注解的类-->
+        <!--<mapper class="asia.lhweb.mapper.UsersMapper"/>-->
+        <!--<package name="mapper"/>-->
+    </mappers>
+</configuration>
