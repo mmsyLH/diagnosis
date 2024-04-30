@@ -36,7 +36,7 @@
     <!-- mapper接口配置：让spring接管mapper的实现类 -->
     <bean id="mapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="asia.lhweb.IntelligentCard.mapper"/>
+        <property name="basePackage" value="asia.lhweb.diagnosis.mapper"/>
     </bean>
 
 </beans>

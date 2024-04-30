@@ -17,4 +17,75 @@
         id,user_id,area_id,
         result,create_time,is_detele
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from question_bank_report
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from question_bank_report
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBankReport" useGeneratedKeys="true">
+        insert into question_bank_report
+        ( id,user_id,area_id
+        ,result,create_time,is_detele
+        )
+        values (#{id,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{areaId,jdbcType=INTEGER}
+        ,#{result,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{isDetele,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBankReport" useGeneratedKeys="true">
+        insert into question_bank_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="userId != null">user_id,</if>
+                <if test="areaId != null">area_id,</if>
+                <if test="result != null">result,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="isDetele != null">is_detele,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="userId != null">#{userId,jdbcType=INTEGER},</if>
+                <if test="areaId != null">#{areaId,jdbcType=INTEGER},</if>
+                <if test="result != null">#{result,jdbcType=VARCHAR},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="isDetele != null">#{isDetele,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBankReport">
+        update question_bank_report
+        <set>
+                <if test="userId != null">
+                    user_id = #{userId,jdbcType=INTEGER},
+                </if>
+                <if test="areaId != null">
+                    area_id = #{areaId,jdbcType=INTEGER},
+                </if>
+                <if test="result != null">
+                    result = #{result,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isDetele != null">
+                    is_detele = #{isDetele,jdbcType=INTEGER},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBankReport">
+        update question_bank_report
+        set 
+            user_id =  #{userId,jdbcType=INTEGER},
+            area_id =  #{areaId,jdbcType=INTEGER},
+            result =  #{result,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            is_detele =  #{isDetele,jdbcType=INTEGER}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
 </mapper>

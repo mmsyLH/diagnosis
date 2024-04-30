@@ -7,4 +7,5 @@ package asia.lhweb.diagnosis.service;
 */
 public interface SysUserService {
 
+    int deleteById(int i);
 }

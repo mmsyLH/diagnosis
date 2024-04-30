@@ -13,7 +13,7 @@ public class SysMenu implements Serializable {
     /**
      * 系统菜单Id
      */
-    private Integer sysMenuId;
+    private Integer id;
 
     /**
      * 系统菜单名

@@ -16,4 +16,71 @@
         id,counselor_id,date,
         time_slot,status
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from work_schedule
+        where 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from work_schedule
+        where 
+    </delete>
+    <insert id="insert">
+        insert into work_schedule
+        ( id,counselor_id,date
+        ,time_slot,status)
+        values (#{id,jdbcType=INTEGER},#{counselorId,jdbcType=INTEGER},#{date,jdbcType=DATE}
+        ,#{timeSlot,jdbcType=TIME},#{status,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective">
+        insert into work_schedule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="counselorId != null">counselor_id,</if>
+                <if test="date != null">date,</if>
+                <if test="timeSlot != null">time_slot,</if>
+                <if test="status != null">status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="counselorId != null">#{counselorId,jdbcType=INTEGER},</if>
+                <if test="date != null">#{date,jdbcType=DATE},</if>
+                <if test="timeSlot != null">#{timeSlot,jdbcType=TIME},</if>
+                <if test="status != null">#{status,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.WorkSchedule">
+        update work_schedule
+        <set>
+                <if test="id != null">
+                    id = #{id,jdbcType=INTEGER},
+                </if>
+                <if test="counselorId != null">
+                    counselor_id = #{counselorId,jdbcType=INTEGER},
+                </if>
+                <if test="date != null">
+                    date = #{date,jdbcType=DATE},
+                </if>
+                <if test="timeSlot != null">
+                    time_slot = #{timeSlot,jdbcType=TIME},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=INTEGER},
+                </if>
+        </set>
+        where  
+    </update>
+    <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.WorkSchedule">
+        update work_schedule
+        set 
+            id =  #{id,jdbcType=INTEGER},
+            counselor_id =  #{counselorId,jdbcType=INTEGER},
+            date =  #{date,jdbcType=DATE},
+            time_slot =  #{timeSlot,jdbcType=TIME},
+            status =  #{status,jdbcType=INTEGER}
+        where  
+    </update>
 </mapper>

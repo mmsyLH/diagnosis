@@ -68,12 +68,8 @@
             <!--分页合理化-->
             <property name="helperDialect" value="mysql"/>
         </plugin>
+
+        <plugin interceptor="asia.lhweb.diagnosis.interceptor.LogicalDeleteInterceptor"/>
     </plugins>
 
-    <mappers>
-        <!--<mapper resource="mapper/UserMapper.xml"/>-->
-        <!--如果是用注解，可不用再引入xml,但是需要引入包含注解的类-->
-        <!--<mapper class="asia.lhweb.mapper.UsersMapper"/>-->
-        <!--<package name="mapper"/>-->
-    </mappers>
 </configuration>

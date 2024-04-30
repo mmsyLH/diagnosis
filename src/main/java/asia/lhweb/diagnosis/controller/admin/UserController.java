@@ -1,4 +1,4 @@
-package asia.lhweb.diagnosis.controller.controller.admin;
+package asia.lhweb.diagnosis.controller.admin;
 
 /**
  * @author :罗汉

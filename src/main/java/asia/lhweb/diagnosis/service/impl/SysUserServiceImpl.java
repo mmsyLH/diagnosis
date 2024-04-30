@@ -1,7 +1,9 @@
 package asia.lhweb.diagnosis.service.impl;
 
 
+import asia.lhweb.diagnosis.mapper.SysUserMapper;
 import asia.lhweb.diagnosis.service.SysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,5 +14,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysUserServiceImpl
 implements SysUserService{
+    @Autowired
+    private SysUserMapper sysUserMapper;
 
+    @Override
+    public int deleteById(int i) {
+        Long id=Long.valueOf(i);
+        int res=sysUserMapper.deleteByPrimaryKey(id);
+        return res;
+    }
 }

@@ -13,7 +13,7 @@ public class SysAdmin implements Serializable {
     /**
      * 管理员表Id
      */
-    private Integer sysAdminId;
+    private Integer id;
 
     /**
      * 系统管理员账户

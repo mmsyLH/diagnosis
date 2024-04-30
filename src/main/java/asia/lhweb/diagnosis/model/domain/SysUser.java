@@ -1,5 +1,6 @@
 package asia.lhweb.diagnosis.model.domain;
 
+import asia.lhweb.diagnosis.annotation.DeleteMarker;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,7 +15,7 @@ public class SysUser implements Serializable {
     /**
      * 系统用户表id
      */
-    private Integer userId;
+    private Integer id;
 
     /**
      * 系统用户账户
@@ -79,6 +80,7 @@ public class SysUser implements Serializable {
     /**
      * 逻辑删除 0不删除 1删除
      */
+    @DeleteMarker
     private Integer isDelete;
 
     private static final long serialVersionUID = 1L;

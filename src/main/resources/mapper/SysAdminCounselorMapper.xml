@@ -15,4 +15,61 @@
         id,counselor_id,area_id,
         price
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_admin_counselor
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_admin_counselor
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.SysAdminCounselor" useGeneratedKeys="true">
+        insert into sys_admin_counselor
+        ( id,counselor_id,area_id
+        ,price)
+        values (#{id,jdbcType=INTEGER},#{counselorId,jdbcType=INTEGER},#{areaId,jdbcType=INTEGER}
+        ,#{price,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.SysAdminCounselor" useGeneratedKeys="true">
+        insert into sys_admin_counselor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="counselorId != null">counselor_id,</if>
+                <if test="areaId != null">area_id,</if>
+                <if test="price != null">price,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="counselorId != null">#{counselorId,jdbcType=INTEGER},</if>
+                <if test="areaId != null">#{areaId,jdbcType=INTEGER},</if>
+                <if test="price != null">#{price,jdbcType=DOUBLE},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.SysAdminCounselor">
+        update sys_admin_counselor
+        <set>
+                <if test="counselorId != null">
+                    counselor_id = #{counselorId,jdbcType=INTEGER},
+                </if>
+                <if test="areaId != null">
+                    area_id = #{areaId,jdbcType=INTEGER},
+                </if>
+                <if test="price != null">
+                    price = #{price,jdbcType=DOUBLE},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.SysAdminCounselor">
+        update sys_admin_counselor
+        set 
+            counselor_id =  #{counselorId,jdbcType=INTEGER},
+            area_id =  #{areaId,jdbcType=INTEGER},
+            price =  #{price,jdbcType=DOUBLE}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
 </mapper>

@@ -13,4 +13,55 @@
     <sql id="Base_Column_List">
         sys_role_id,id,sys_role_name
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_role
+        where  sys_role_id = #{sysRoleId,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_role
+        where  sys_role_id = #{sysRoleId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="sys_role_id" keyProperty="sysRoleId" parameterType="asia.lhweb.diagnosis.model.domain.SysRole" useGeneratedKeys="true">
+        insert into sys_role
+        ( sys_role_id,id,sys_role_name
+        )
+        values (#{sysRoleId,jdbcType=INTEGER},#{id,jdbcType=INTEGER},#{sysRoleName,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="sys_role_id" keyProperty="sysRoleId" parameterType="asia.lhweb.diagnosis.model.domain.SysRole" useGeneratedKeys="true">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="sysRoleId != null">sys_role_id,</if>
+                <if test="id != null">id,</if>
+                <if test="sysRoleName != null">sys_role_name,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="sysRoleId != null">#{sysRoleId,jdbcType=INTEGER},</if>
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="sysRoleName != null">#{sysRoleName,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.SysRole">
+        update sys_role
+        <set>
+                <if test="id != null">
+                    id = #{id,jdbcType=INTEGER},
+                </if>
+                <if test="sysRoleName != null">
+                    sys_role_name = #{sysRoleName,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   sys_role_id = #{sysRoleId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.SysRole">
+        update sys_role
+        set 
+            id =  #{id,jdbcType=INTEGER},
+            sys_role_name =  #{sysRoleName,jdbcType=VARCHAR}
+        where   sys_role_id = #{sysRoleId,jdbcType=INTEGER} 
+    </update>
 </mapper>

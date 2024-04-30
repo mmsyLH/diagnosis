@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="diagnosis:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d9d846b5-0a98-4c2e-9269-754a3aaa2d8b" name="变更" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/annotation/DeleteMarker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/annotation/Id.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/annotation/MyEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/common/BaseContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/common/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/config/CaptchaConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/config/CorsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/config/TransactionConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/constant/BaseConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/interceptor/LogicalDeleteInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/interceptor/LoginInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/AliOssUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/Base64Util.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/DataUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/JDBCUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/JwtUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/MybatisUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/MysqlToBeans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/XMLParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/redis.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/AppointmentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/AppointmentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/AreaMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/AreaMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/CommentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/CounselorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/CounselorMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/DiagnosisMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/DiagnosisMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/QuestionBankMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/QuestionBankMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/QuestionBankReportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/QuestionBankReportMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysAdminCounselorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysAdminCounselorMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysAdminMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysAdminMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysDictMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysDictMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysLogMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysMenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysMenuMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysRoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysRoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysRoleMenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysRoleMenuMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysUserMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/TransactionCounselorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/TransactionCounselorMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/TransactionUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/TransactionUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/WorkScheduleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/WorkScheduleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Appointment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Area.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Comment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Counselor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Diagnosis.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/QuestionBank.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/QuestionBankReport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysAdmin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysAdminCounselor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysDict.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysLog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysRoleMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/SysUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/TransactionCounselor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/TransactionUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/WorkSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/SysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/SysUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/SysUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/AppointmentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AppointmentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CommentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CounselorMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CounselorMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DiagnosisMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DiagnosisMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/QuestionBankMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/QuestionBankMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/QuestionBankReportMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/QuestionBankReportMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysAdminCounselorMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysAdminCounselorMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysAdminMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysAdminMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysDictMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysDictMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysLogMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysLogMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysMenuMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysMenuMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysRoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysRoleMenuMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysRoleMenuMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/TransactionCounselorMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/TransactionCounselorMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/TransactionUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/TransactionUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/WorkScheduleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/WorkScheduleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-ioc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring-ioc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\dev\maven\repository" />
+        <option name="mavenHome" value="E:/dev/maven/apache-maven-3.5.2-bin/apache-maven-3.5.2" />
+        <option name="useMavenConfig" value="true" />
+        <option name="userSettingsFile" value="E:\dev\maven\apache-maven-3.5.2-bin\apache-maven-3.5.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="#JAVA_HOME" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2fiQ4hrzudFhroJ0G3gwdqAgWo3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "MyBatisLogPluginindexNum": "48",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "F:/cykjWorkSpacrce/diagnosis/src/main/resources",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15619047",
+    "project.structure.side.proportion": "0.31865585",
+    "settings.editor.selected.configurable": "easydoc.common.settings",
+    "spring.configuration.checksum": "2653c64cd61ebf1701be2c974c4e14af"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\cykjWorkSpacrce\diagnosis\src\main\resources" />
+      <recent name="F:\cykjWorkSpacrce\diagnosis\src\main\java\asia\lhweb\diagnosis" />
+      <recent name="F:\cykjWorkSpacrce\diagnosis\src\main\resources\mapper" />
+      <recent name="F:\cykjWorkSpacrce\diagnosis" />
+      <recent name="F:\cykjWorkSpacrce\diagnosis\src\main\webapp\WEB-INF" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\cykjWorkSpacrce\diagnosis\src\main\resources\mapper" />
+      <recent name="F:\cykjWorkSpacrce\diagnosis\src\main\java\asia\lhweb\diagnosis\mapper" />
+      <recent name="F:\cykjWorkSpacrce\diagnosis\src\main\java" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="asia.lhweb.diagnosis.constant" />
+      <recent name="asia.lhweb.diagnosis.interceptor" />
+      <recent name="asia.lhweb.diagnosis.annotation" />
+      <recent name="asia.lhweb.diagnosis.Interceptor" />
+      <recent name="asia.lhweb.diagnosis.controller.common" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat 服务器.Tomcat 9.0.24">
+    <configuration name="SpringTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.SpringTest" />
+      <module name="diagnosis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 9.0.24" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.24" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="diagnosis:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/diagnosis" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="230ea7fa-af52-4da4-a46d-c3bb39305e67" />
+        <option name="HTTP_PORT" value="8090" />
+        <option name="JNDI_PORT" value="1999" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="2625" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="diagnosis:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Tomcat 服务器.Tomcat 9.0.24" />
+      <item itemvalue="应用程序.SpringTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.SpringTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="d9d846b5-0a98-4c2e-9269-754a3aaa2d8b" name="变更" comment="" />
+      <created>1714281229035</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714281229035</updated>
+      <workItem from="1714281230747" duration="14965000" />
+      <workItem from="1714316493716" duration="1624000" />
+      <workItem from="1714351552249" duration="2904000" />
+      <workItem from="1714354612879" duration="9445000" />
+      <workItem from="1714367665704" duration="198000" />
+      <workItem from="1714367920946" duration="10289000" />
+      <workItem from="1714386685679" duration="1126000" />
+      <workItem from="1714387857962" duration="505000" />
+      <workItem from="1714390650016" duration="62000" />
+      <workItem from="1714390865726" duration="1226000" />
+      <workItem from="1714392138218" duration="16001000" />
+      <workItem from="1714454407784" duration="427000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="罗汉/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/interceptor/LoginInterceptor.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/TestController.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/interceptor/LogicalDeleteInterceptor.java</url>
+          <line>134</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/interceptor/LogicalDeleteInterceptor.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/interceptor/LogicalDeleteInterceptor.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.apache.ibatis.mapping.MappedStatement" memberName="id" />
+        <PinnedItemInfo parentTag="org.apache.ibatis.mapping.MappedStatement" memberName="configuration" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

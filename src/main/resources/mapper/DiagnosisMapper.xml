@@ -19,4 +19,85 @@
         diagnosis_results,diagnosis_description,create_time,
         is_delete
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from diagnosis
+        where 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from diagnosis
+        where 
+    </delete>
+    <insert id="insert">
+        insert into diagnosis
+        ( id,user_id,appointment_id
+        ,diagnosis_results,diagnosis_description,create_time
+        ,is_delete)
+        values (#{id,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{appointmentId,jdbcType=INTEGER}
+        ,#{diagnosisResults,jdbcType=VARCHAR},#{diagnosisDescription,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}
+        ,#{isDelete,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective">
+        insert into diagnosis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="userId != null">user_id,</if>
+                <if test="appointmentId != null">appointment_id,</if>
+                <if test="diagnosisResults != null">diagnosis_results,</if>
+                <if test="diagnosisDescription != null">diagnosis_description,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="isDelete != null">is_delete,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="userId != null">#{userId,jdbcType=INTEGER},</if>
+                <if test="appointmentId != null">#{appointmentId,jdbcType=INTEGER},</if>
+                <if test="diagnosisResults != null">#{diagnosisResults,jdbcType=VARCHAR},</if>
+                <if test="diagnosisDescription != null">#{diagnosisDescription,jdbcType=VARCHAR},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="isDelete != null">#{isDelete,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.Diagnosis">
+        update diagnosis
+        <set>
+                <if test="id != null">
+                    id = #{id,jdbcType=INTEGER},
+                </if>
+                <if test="userId != null">
+                    user_id = #{userId,jdbcType=INTEGER},
+                </if>
+                <if test="appointmentId != null">
+                    appointment_id = #{appointmentId,jdbcType=INTEGER},
+                </if>
+                <if test="diagnosisResults != null">
+                    diagnosis_results = #{diagnosisResults,jdbcType=VARCHAR},
+                </if>
+                <if test="diagnosisDescription != null">
+                    diagnosis_description = #{diagnosisDescription,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isDelete != null">
+                    is_delete = #{isDelete,jdbcType=INTEGER},
+                </if>
+        </set>
+        where  
+    </update>
+    <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.Diagnosis">
+        update diagnosis
+        set 
+            id =  #{id,jdbcType=INTEGER},
+            user_id =  #{userId,jdbcType=INTEGER},
+            appointment_id =  #{appointmentId,jdbcType=INTEGER},
+            diagnosis_results =  #{diagnosisResults,jdbcType=VARCHAR},
+            diagnosis_description =  #{diagnosisDescription,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            is_delete =  #{isDelete,jdbcType=INTEGER}
+        where  
+    </update>
 </mapper>

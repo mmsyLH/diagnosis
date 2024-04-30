@@ -33,6 +33,42 @@
         </property>
     </bean>
 
+    <mvc:interceptors>
+        <!--         使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
+        <mvc:interceptor>
+            <!-- 进行拦截：/**表示拦截所有controller -->
+            <mvc:mapping path="/**" />
+            <!-- 不进行拦截 -->
+            <mvc:exclude-mapping path="/admin/admin/login" />
+            <mvc:exclude-mapping path="/common/getCode" />
+            <mvc:exclude-mapping path="/text/**" />
+            <bean class="asia.lhweb.diagnosis.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--配置redis配置文件-->
+    <context:property-placeholder location="classpath:redis.properties"/>
+
+    <!-- Redis连接工厂配置 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="database" value="${redis.database}"/>
+        <property name="password" value="${redis.password}"/>
+    </bean>
+
+    <!-- Redis操作模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <!-- 设置key和value的序列化方式 -->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
     <!--    静态资源映射-->
     <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
 </beans>

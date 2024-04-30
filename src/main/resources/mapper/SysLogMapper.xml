@@ -20,4 +20,91 @@
         log_result,input_params,output_params,
         create_time,is_delete
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_log
+        where 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_log
+        where 
+    </delete>
+    <insert id="insert">
+        insert into sys_log
+        ( id,admin_id,log_content
+        ,log_result,input_params,output_params
+        ,create_time,is_delete)
+        values (#{id,jdbcType=INTEGER},#{adminId,jdbcType=INTEGER},#{logContent,jdbcType=VARCHAR}
+        ,#{logResult,jdbcType=VARCHAR},#{inputParams,jdbcType=VARCHAR},#{outputParams,jdbcType=VARCHAR}
+        ,#{createTime,jdbcType=TIMESTAMP},#{isDelete,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective">
+        insert into sys_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="adminId != null">admin_id,</if>
+                <if test="logContent != null">log_content,</if>
+                <if test="logResult != null">log_result,</if>
+                <if test="inputParams != null">input_params,</if>
+                <if test="outputParams != null">output_params,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="isDelete != null">is_delete,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="adminId != null">#{adminId,jdbcType=INTEGER},</if>
+                <if test="logContent != null">#{logContent,jdbcType=VARCHAR},</if>
+                <if test="logResult != null">#{logResult,jdbcType=VARCHAR},</if>
+                <if test="inputParams != null">#{inputParams,jdbcType=VARCHAR},</if>
+                <if test="outputParams != null">#{outputParams,jdbcType=VARCHAR},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="isDelete != null">#{isDelete,jdbcType=INTEGER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.SysLog">
+        update sys_log
+        <set>
+                <if test="id != null">
+                    id = #{id,jdbcType=INTEGER},
+                </if>
+                <if test="adminId != null">
+                    admin_id = #{adminId,jdbcType=INTEGER},
+                </if>
+                <if test="logContent != null">
+                    log_content = #{logContent,jdbcType=VARCHAR},
+                </if>
+                <if test="logResult != null">
+                    log_result = #{logResult,jdbcType=VARCHAR},
+                </if>
+                <if test="inputParams != null">
+                    input_params = #{inputParams,jdbcType=VARCHAR},
+                </if>
+                <if test="outputParams != null">
+                    output_params = #{outputParams,jdbcType=VARCHAR},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isDelete != null">
+                    is_delete = #{isDelete,jdbcType=INTEGER},
+                </if>
+        </set>
+        where  
+    </update>
+    <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.SysLog">
+        update sys_log
+        set 
+            id =  #{id,jdbcType=INTEGER},
+            admin_id =  #{adminId,jdbcType=INTEGER},
+            log_content =  #{logContent,jdbcType=VARCHAR},
+            log_result =  #{logResult,jdbcType=VARCHAR},
+            input_params =  #{inputParams,jdbcType=VARCHAR},
+            output_params =  #{outputParams,jdbcType=VARCHAR},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            is_delete =  #{isDelete,jdbcType=INTEGER}
+        where  
+    </update>
 </mapper>

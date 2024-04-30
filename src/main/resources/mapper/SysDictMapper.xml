@@ -13,4 +13,55 @@
     <sql id="Base_Column_List">
         id,dict_name,dict_data
     </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_dict
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_dict
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.SysDict" useGeneratedKeys="true">
+        insert into sys_dict
+        ( id,dict_name,dict_data
+        )
+        values (#{id,jdbcType=INTEGER},#{dictName,jdbcType=VARCHAR},#{dictData,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.SysDict" useGeneratedKeys="true">
+        insert into sys_dict
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="dictName != null">dict_name,</if>
+                <if test="dictData != null">dict_data,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=INTEGER},</if>
+                <if test="dictName != null">#{dictName,jdbcType=VARCHAR},</if>
+                <if test="dictData != null">#{dictData,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.SysDict">
+        update sys_dict
+        <set>
+                <if test="dictName != null">
+                    dict_name = #{dictName,jdbcType=VARCHAR},
+                </if>
+                <if test="dictData != null">
+                    dict_data = #{dictData,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.SysDict">
+        update sys_dict
+        set 
+            dict_name =  #{dictName,jdbcType=VARCHAR},
+            dict_data =  #{dictData,jdbcType=VARCHAR}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
 </mapper>
