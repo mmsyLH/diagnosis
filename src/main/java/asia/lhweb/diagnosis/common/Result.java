@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * 后端统一返回结果
+ * 后端统一返回结果 1.0初版
  *
  * @param <T>
  * @author 罗汉
@@ -20,17 +20,37 @@ public class Result<T> implements Serializable {
     public Result() {
     }
 
+    /**
+     * 成功
+     *
+     * @return {@link Result}<{@link T}>
+     */
     public static <T> Result<T> success() {
         Result<T> result = new Result<>();
         result.code = 200;
         return result;
     }
+
+    /**
+     * 成功
+     *
+     * @param msg 味精
+     * @return {@link Result}<{@link T}>
+     */
     public static <T> Result<T> success(String msg) {
         Result<T> result = new Result<>();
         result.msg=msg;
         result.code = 200;
         return result;
     }
+
+    /**
+     * 成功
+     *
+     * @param object 对象
+     * @param msg    味精
+     * @return {@link Result}<{@link T}>
+     */
     public static <T> Result<T> success(T object,String msg) {
         Result<T> result = new Result<>();
         result.data = object;

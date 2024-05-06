@@ -14,8 +14,8 @@
             <result property="menuParentId" column="menu_parent_id" jdbcType="INTEGER"/>
             <result property="menuIsHidden" column="menu_is_hidden" jdbcType="INTEGER"/>
             <result property="menuSort" column="menu_sort" jdbcType="INTEGER"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
             <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -25,12 +25,42 @@
         menu_parent_id,menu_is_hidden,menu_sort,
         create_time,update_time,is_delete
     </sql>
-
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from sys_menu
         where  id = #{id,jdbcType=INTEGER} 
+    </select>
+    <select id="selectMenuTreeByAdminId" resultType="asia.lhweb.diagnosis.model.vo.SysMenuLeftVO">
+        SELECT
+            sm.id,
+            menu_name,
+            menu_component,
+            menu_path,
+            menu_icon,
+            menu_status,
+            menu_parent_id,
+            menu_is_hidden,
+            menu_sort,
+            sm.create_time,
+            sm.update_time,
+            sm.is_delete,
+            sa.id AS sa_id,
+            sr.id AS sr_id,
+            rm.id AS rm_id,
+            sm.id AS sm_id
+        FROM
+            sys_admin sa
+                LEFT JOIN sys_role sr ON sa.admin_role_id = sr.sys_role_id
+                LEFT JOIN sys_role_menu rm ON rm.role_id = sa.admin_role_id
+                LEFT JOIN sys_menu sm ON rm.menu_id = sm.id
+        WHERE
+            sa.id = #{adminId}
+          AND sa.is_delete = 0
+          AND sm.is_delete = 0
+        ORDER BY
+            sm.menu_sort;
+
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

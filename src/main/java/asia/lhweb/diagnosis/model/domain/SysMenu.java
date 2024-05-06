@@ -1,8 +1,8 @@
 package asia.lhweb.diagnosis.model.domain;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 系统菜单表
@@ -58,12 +58,12 @@ public class SysMenu implements Serializable {
     /**
      * 菜单创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private String updateTime;
 
     /**
      * 是否逻辑删除 0未删除 1删除

@@ -42,6 +42,10 @@
             <mvc:exclude-mapping path="/admin/admin/login" />
             <mvc:exclude-mapping path="/common/getCode" />
             <mvc:exclude-mapping path="/text/**" />
+            <mvc:exclude-mapping path="/swagger-ui.html" />
+            <mvc:exclude-mapping path="/webjars/**" />
+            <mvc:exclude-mapping path="/swagger-resources/**"/>
+            <mvc:exclude-mapping path="/v2/api-docs"/>
             <bean class="asia.lhweb.diagnosis.interceptor.LoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

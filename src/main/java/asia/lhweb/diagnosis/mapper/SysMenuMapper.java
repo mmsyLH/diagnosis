@@ -1,6 +1,9 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.SysMenu;
+import asia.lhweb.diagnosis.model.vo.SysMenuLeftVO;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -22,4 +25,5 @@ public interface SysMenuMapper {
 
     int updateByPrimaryKey(SysMenu record);
 
+    List<SysMenuLeftVO> selectMenuTreeByAdminId(Integer adminId);
 }

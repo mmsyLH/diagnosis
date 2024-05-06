@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.SysAdmin;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author Administrator
@@ -22,4 +23,5 @@ public interface SysAdminMapper {
 
     int updateByPrimaryKey(SysAdmin record);
 
+    SysAdmin selectOne(@Param("sysAccount") String sysAccount, @Param("sysPassword") String encryptPassword);
 }

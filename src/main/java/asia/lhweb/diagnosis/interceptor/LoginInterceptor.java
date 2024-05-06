@@ -1,12 +1,13 @@
 package asia.lhweb.diagnosis.interceptor;
 
 
-import asia.lhweb.diagnosis.common.Result;
+import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.constant.BaseConstant;
+import asia.lhweb.diagnosis.exception.BusinessException;
+import asia.lhweb.diagnosis.model.vo.LoginAdminVO;
 import asia.lhweb.diagnosis.utils.JwtUtil;
-import com.alibaba.fastjson.JSON;
+import asia.lhweb.diagnosis.utils.cache.RedisCacheUtil;
 import io.jsonwebtoken.Claims;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;
@@ -19,34 +20,36 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LoginInterceptor implements HandlerInterceptor {
     @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisCacheUtil redisCacheUtil;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         response.setContentType("application/json;charset=utf-8");
         response.setCharacterEncoding("utf-8");
         String token = request.getHeader(BaseConstant.TOKEN_NAME);
-        if (token == null||"".equals(token)){
-            response.getWriter().write(JSON.toJSONString(Result.error("token为空")));
-            return false;
+        if (token == null || "".equals(token)) {
+            throw new BusinessException(ErrorCode.NOT_LOGIN, "token为空");
         }
         try {
             Claims claims = JwtUtil.parseJWT(token);
             System.err.println(claims);
-            String adminAccount = claims.get("adminAccount", String.class);
-            System.out.println(adminAccount);
-            String tokenInRedis = redisTemplate.opsForValue().get(adminAccount);
-            if (tokenInRedis == null||"".equals(tokenInRedis)){
-                response.getWriter().write(JSON.toJSONString(Result.error(403,"Token验证失败或已过期，请重新登录！")));
-                return false;
+            String adminAccount = claims.get("sysAccount", String.class);
+            if (!redisCacheUtil.hasKey(String.format(BaseConstant.REDIS_ADMIN_KEY_FORMAT, adminAccount))){
+                throw new BusinessException(ErrorCode.NOT_LOGIN, "Token验证失败或已过期，请重新登录！");
             }
-            if (JwtUtil.parseJWT(tokenInRedis)!=null&&JwtUtil.parseJWT(token)!=null&&token.equals(tokenInRedis)){
-                return true;
+            LoginAdminVO tokenInRedis = redisCacheUtil.getCacheObject(String.format(BaseConstant.REDIS_ADMIN_KEY_FORMAT, adminAccount));
+            if (tokenInRedis == null) {
+                throw new BusinessException(ErrorCode.NOT_LOGIN,"Token验证失败或已过期，请重新登录！");
             }
-        } catch (Exception e) {//说明解密失败 客户端返回信息
+            String redisToken = tokenInRedis.getToken();
+            if (!token.equals(redisToken)){
+                throw new BusinessException(ErrorCode.NOT_LOGIN, "Token验证失败或已过期，请重新登录！");
+            }
+        } catch (Exception e) {// 说明解密失败 客户端返回信息
             e.printStackTrace();
-            response.getWriter().write(JSON.toJSONString(Result.error(403,"Token验证失败或已过期，请重新登录！")));
+            throw new BusinessException(ErrorCode.NOT_LOGIN, "Token验证失败或已过期，请重新登录！");
         }
-        return false;
+        // 放行
+        return true;
     }
 }
