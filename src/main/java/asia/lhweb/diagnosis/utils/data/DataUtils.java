@@ -1,4 +1,4 @@
-package asia.lhweb.diagnosis.utils;
+package asia.lhweb.diagnosis.utils.data;
 
 
 import asia.lhweb.diagnosis.constant.BaseConstant;

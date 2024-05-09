@@ -12,6 +12,7 @@ import io.jsonwebtoken.Claims;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,7 +31,18 @@ public class LoginInterceptor implements HandlerInterceptor {
         response.setContentType("application/json;charset=utf-8");
         response.setCharacterEncoding("utf-8");
         //解析token
-        String token = request.getHeader(BaseConstant.TOKEN_NAME);
+        Cookie[] cookies = request.getCookies();
+        String token = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (BaseConstant.TOKEN_NAME.equals(cookie.getName())) {
+                    token = cookie.getValue();
+                }
+            }
+        }
+        if (token == null){
+            token= request.getHeader(BaseConstant.TOKEN_NAME);
+        }
         if (token == null || "".equals(token)) {
             response.getWriter().write(JSON.toJSONString(Result.error("token为空")));
             return false;

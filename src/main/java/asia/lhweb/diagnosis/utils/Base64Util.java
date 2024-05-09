@@ -2,13 +2,14 @@ package asia.lhweb.diagnosis.utils;
 
 // import org.apache.tika.Tika;
 
+import asia.lhweb.diagnosis.utils.data.DataUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Base64;
 
 /**
- * base64跑龙套
  * base64工具类
  *
  * @author 罗汉

@@ -1,11 +1,15 @@
 package asia.lhweb.diagnosis.controller.common;
 
+import asia.lhweb.diagnosis.common.BaseResponse;
+import asia.lhweb.diagnosis.common.ResultUtils;
+import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.constant.BaseConstant;
+import asia.lhweb.diagnosis.exception.BusinessException;
+import asia.lhweb.diagnosis.utils.AliOssUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -15,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -22,6 +27,26 @@ import java.io.IOException;
 public class CommonController {
     @Resource
     private DefaultKaptcha defaultKaptcha;
+    @Resource
+    private AliOssUtil aliOssUtil;
+
+    @PostMapping("/upload")
+    @ApiOperation("文件上传")
+    public BaseResponse update(MultipartFile file) {
+        try {
+            // 获取原来的文件名
+            String originalFilename = file.getOriginalFilename();
+            // 截取扩展名后缀
+            String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+            String objectName = UUID.randomUUID() + extension;
+
+            // 文件请求路径
+            String filePath = aliOssUtil.upload(file.getBytes(), objectName);
+            return ResultUtils.success(filePath);
+        } catch (IOException e) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "上传失败");
+        }
+    }
 
     @GetMapping(value = "/getCode", produces = "image/jpeg")
     public void getCaptcha(HttpServletRequest request, HttpServletResponse response) {
@@ -64,7 +89,6 @@ public class CommonController {
             }
         }
     }
-
     // /**
     //  * 文件上传操作
     //  *
