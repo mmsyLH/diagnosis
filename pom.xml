@@ -154,19 +154,44 @@
       <version>1.2.6</version>
     </dependency>
 
-    <!-- springfox-swagger2依赖：用于生成Swagger 2的API文档 -->
+    <!--&lt;!&ndash; springfox-swagger2依赖：用于生成Swagger 2的API文档 &ndash;&gt;-->
+    <!--<dependency>-->
+    <!--  <groupId>io.springfox</groupId>-->
+    <!--  <artifactId>springfox-swagger2</artifactId>-->
+    <!--  <version>2.9.2</version>-->
+    <!--</dependency>-->
+
+    <!--&lt;!&ndash; springfox-swagger-ui依赖：用于提供Swagger UI，以便于前端开发者和API使用者交互 &ndash;&gt;-->
+    <!--<dependency>-->
+    <!--  <groupId>io.springfox</groupId>-->
+    <!--  <artifactId>springfox-swagger-ui</artifactId>-->
+    <!--  <version>2.9.2</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger2</artifactId>
       <version>2.9.2</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
-    <!-- springfox-swagger-ui依赖：用于提供Swagger UI，以便于前端开发者和API使用者交互 -->
     <dependency>
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger-ui</artifactId>
       <version>2.9.2</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
+
+
 
     <!-- io常用工具类 -->
     <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->

@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.SysRole;
+import com.github.pagehelper.Page;
 
 /**
 * @author Administrator
@@ -22,4 +23,5 @@ public interface SysRoleMapper {
 
     int updateByPrimaryKey(SysRole record);
 
+    Page<SysRole> selectAllIf(SysRole sysRole);
 }

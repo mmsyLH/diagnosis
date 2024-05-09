@@ -1,6 +1,9 @@
 package asia.lhweb.diagnosis.service;
 
 
+import asia.lhweb.diagnosis.model.PageResult;
+import asia.lhweb.diagnosis.model.domain.Counselor;
+import asia.lhweb.diagnosis.model.dto.CounselorDTO;
 
 /**
 * @author Administrator
@@ -9,4 +12,19 @@ package asia.lhweb.diagnosis.service;
 */
 public interface CounselorService {
 
+    /**
+     * 页面
+     *
+     * @param counselorDTO 辅导员dto
+     * @return {@link PageResult}<{@link Counselor}>
+     */
+    PageResult<Counselor> page(CounselorDTO counselorDTO);
+
+    /**
+     * 按id删除
+     *
+     * @param id id
+     * @return boolean
+     */
+    boolean deleteById(int id);
 }

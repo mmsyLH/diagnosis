@@ -2,6 +2,7 @@ package asia.lhweb.diagnosis.service;
 
 import asia.lhweb.diagnosis.model.vo.SysMenuLeftVO;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,5 +18,9 @@ public interface SysMenuService{
      * @param adminId 管理员id
      * @return {@link List}<{@link SysMenuLeftVO}>
      */
-    List<SysMenuLeftVO> selectMenuTreeByAdminId(Integer adminId);
+    HashMap<String, List<SysMenuLeftVO>> selectMenuTreeByAdminId(Integer adminId);
+
+    List<SysMenuLeftVO> selectFalseTrueByAdminId(Integer adminId);
+
+    HashMap<String, List<SysMenuLeftVO>> selectMenuTreeByRoleId(Integer roleId);
 }

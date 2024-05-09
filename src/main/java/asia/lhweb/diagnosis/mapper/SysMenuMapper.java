@@ -26,4 +26,8 @@ public interface SysMenuMapper {
     int updateByPrimaryKey(SysMenu record);
 
     List<SysMenuLeftVO> selectMenuTreeByAdminId(Integer adminId);
+
+    List<SysMenuLeftVO> selectAllMenuTree();
+
+    List<SysMenuLeftVO> selectMenuTreeByRoleId(Integer roleId);
 }

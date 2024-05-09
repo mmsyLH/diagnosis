@@ -1,6 +1,6 @@
-package asia.lhweb.diagnosis.model.domain;
+package asia.lhweb.diagnosis.model.dto;
 
-import asia.lhweb.diagnosis.annotation.DeleteMarker;
+import asia.lhweb.diagnosis.model.PageRequest;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @TableName counselor
  */
 @Data
-public class Counselor implements Serializable {
+public class CounselorDTO extends PageRequest implements Serializable {
     /**
      * 咨询师表id
      */
@@ -56,11 +56,6 @@ public class Counselor implements Serializable {
      */
     private String updateTime;
 
-    /**
-     * 0未删除 1删除
-     */
-    @DeleteMarker
-    private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
 }

@@ -2,6 +2,8 @@ package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.annotation.MyEntity;
 import asia.lhweb.diagnosis.model.domain.SysUser;
+import asia.lhweb.diagnosis.model.dto.SysUserDTO;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,4 +32,6 @@ public interface SysUserMapper {
     List<SysUser> selectList();
 
     SysUser selectOne(@Param("userAccount") String userAccount, @Param("userPassword") String encryptPassword);
+
+    Page<SysUser> selectAllIf(SysUserDTO sysUserDTO);
 }

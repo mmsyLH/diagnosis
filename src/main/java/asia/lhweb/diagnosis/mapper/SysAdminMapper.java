@@ -1,6 +1,8 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.SysAdmin;
+import asia.lhweb.diagnosis.model.dto.SysAdminDTO;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -24,4 +26,7 @@ public interface SysAdminMapper {
     int updateByPrimaryKey(SysAdmin record);
 
     SysAdmin selectOne(@Param("sysAccount") String sysAccount, @Param("sysPassword") String encryptPassword);
+
+    Page<SysAdmin> selectAllIf(SysAdminDTO sysAdminDTO);
+
 }

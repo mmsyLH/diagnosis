@@ -20,6 +20,22 @@
         from sys_role
         where  sys_role_id = #{sysRoleId,jdbcType=INTEGER} 
     </select>
+    <select id="selectAllIf" resultType="asia.lhweb.diagnosis.model.domain.SysRole">
+        select
+        <include refid="Base_Column_List" />
+        from sys_role
+        <where>
+            <if test="sysRoleId != null">
+                and sys_role_id = #{sysRoleId}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="sysRoleName != null">
+                and sys_role_name like concat('%',#{sysRoleName},'%')
+            </if>
+        </where>
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from sys_role

@@ -6,24 +6,29 @@ import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.mapper.SysMenuMapper;
 import asia.lhweb.diagnosis.model.vo.SysMenuLeftVO;
 import asia.lhweb.diagnosis.service.SysMenuService;
+import asia.lhweb.diagnosis.utils.cache.RedisCacheUtil;
+import asia.lhweb.diagnosis.utils.data.MenuTreeUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 /**
-* @author Administrator
-* @description 针对表【sys_menu(系统菜单表)】的数据库操作Service实现
-* @createDate 2024-04-28 20:11:50
-*/
+ * @author Administrator
+ * @description 针对表【sys_menu(系统菜单表)】的数据库操作Service实现
+ * @createDate 2024-04-28 20:11:50
+ */
 @Service
 public class SysMenuServiceImpl
-implements SysMenuService{
+        implements SysMenuService {
     @Resource
     private SysMenuMapper sysMenuMapper;
+    @Resource
+    private RedisCacheUtil redisCacheUtil;
 
     /**
      * 按admin id选择菜单树
@@ -32,20 +37,94 @@ implements SysMenuService{
      * @return {@link List}<{@link SysMenuLeftVO}>
      */
     @Override
-    public List<SysMenuLeftVO> selectMenuTreeByAdminId(Integer adminId) {
-        // 根据管理员id查询菜单树
-        List<SysMenuLeftVO> menuTree = sysMenuMapper.selectMenuTreeByAdminId(adminId);
+    public HashMap<String, List<SysMenuLeftVO>> selectMenuTreeByAdminId(Integer adminId) {
+        // 根据管理员id查询自己的菜单树
+        List<SysMenuLeftVO> myMenuTree = sysMenuMapper.selectMenuTreeByAdminId(adminId);
         // 如果查询结果为空，表示该管理员没有权限，返回错误信息
-        if (CollectionUtils.isEmpty(menuTree)) {
+        if (CollectionUtils.isEmpty(myMenuTree)) {
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
-        // 获取管理员的所有权限菜单（包括子权限）
-        List<SysMenuLeftVO> sysMenuLeftVOList = getChildPerms(menuTree, 0);
-        if (CollectionUtils.isEmpty(sysMenuLeftVOList)){
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
-        }
-        return sysMenuLeftVOList;
+        // 方式1 获取管理员的所有权限菜单（包括子权限） 时间复杂度O(n^2)
+        // List<SysMenuLeftVO> sysMenuLeftVOList = getChildPerms(myMenuTree, 0);
+        // if (CollectionUtils.isEmpty(sysMenuLeftVOList)) {
+        //     throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        // }
+        // String redisKey = String.format(AdminConstant.MENU_ADMIN_KEY, adminId);
+        // // 存入redis中
+        // redisCacheUtil.setCacheList(redisKey, sysMenuLeftVOList);
+        // // 设置过期时间为一小时（假设设置为一小时）
+        // redisCacheUtil.expire(redisKey, 1, TimeUnit.HOURS);
+
+        // 方式2 获取管理员的所有权限菜单（包括子权限） 时间复杂度O(n)
+        // 1 再查询全部的树 上面已经查了自己有了权限的菜单树
+        List<SysMenuLeftVO> allMenuTree = sysMenuMapper.selectAllMenuTree();
+
+        // 2 去查询菜单树
+        List<SysMenuLeftVO> trueTree=MenuTreeUtil.getResultMenuTree(myMenuTree, allMenuTree,true);
+        List<SysMenuLeftVO> falseMenuTree = MenuTreeUtil.getResultMenuTree(myMenuTree, allMenuTree, false);
+        HashMap<String, List<SysMenuLeftVO>> objectObjectHashMap = new HashMap<>();
+        objectObjectHashMap.put("true",trueTree);
+        objectObjectHashMap.put("false",falseMenuTree);
+
+        return objectObjectHashMap;
     }
+
+
+
+    @Override
+    public List<SysMenuLeftVO> selectFalseTrueByAdminId(Integer adminId) {
+        // 根据管理员id查询自己的菜单树
+        List<SysMenuLeftVO> myMenuTree = sysMenuMapper.selectMenuTreeByAdminId(adminId);
+        List<SysMenuLeftVO> allMenuTree = sysMenuMapper.selectAllMenuTree();
+        // 如果查询结果为空，表示该管理员没有权限，返回错误信息
+        if (CollectionUtils.isEmpty(myMenuTree)) {
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+
+        List<SysMenuLeftVO> resultMenuTree=MenuTreeUtil.getResultMenuTree(myMenuTree, allMenuTree,false);
+        // 4 封装返回的map
+        return resultMenuTree;
+    }
+
+    @Override
+    public HashMap<String, List<SysMenuLeftVO>> selectMenuTreeByRoleId(Integer roleId) {
+        // 根据管理员id查询自己的菜单树
+        List<SysMenuLeftVO> myMenuTree = sysMenuMapper.selectMenuTreeByRoleId(roleId);
+        // 如果查询结果为空，表示该管理员没有权限，返回错误信息
+        if (CollectionUtils.isEmpty(myMenuTree)) {
+            if (roleId==3){
+                throw new BusinessException(ErrorCode.NULL_ERROR,"超级管理员没有可分配的菜单了 。请联系管理员！！");
+            }
+
+            myMenuTree=new ArrayList<>();
+        }
+
+        // 方式1 获取管理员的所有权限菜单（包括子权限） 时间复杂度O(n^2)
+        // List<SysMenuLeftVO> sysMenuLeftVOList = getChildPerms(myMenuTree, 0);
+        // if (CollectionUtils.isEmpty(sysMenuLeftVOList)) {
+        //     throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        // }
+        // String redisKey = String.format(AdminConstant.MENU_ADMIN_KEY, adminId);
+        // // 存入redis中
+        // redisCacheUtil.setCacheList(redisKey, sysMenuLeftVOList);
+        // // 设置过期时间为一小时（假设设置为一小时）
+        // redisCacheUtil.expire(redisKey, 1, TimeUnit.HOURS);
+
+        // 方式2 获取管理员的所有权限菜单（包括子权限） 时间复杂度O(n)
+        // 1 再查询全部的树 上面已经查了自己有了权限的菜单树
+        List<SysMenuLeftVO> allMenuTree = sysMenuMapper.selectAllMenuTree();
+
+        // 2 去查询菜单树
+        List<SysMenuLeftVO> trueTree=MenuTreeUtil.getResultMenuTree(myMenuTree, allMenuTree,true);
+        List<SysMenuLeftVO> falseMenuTree = MenuTreeUtil.getResultMenuTree(myMenuTree, allMenuTree, false);
+        HashMap<String, List<SysMenuLeftVO>> objectObjectHashMap = new HashMap<>();
+        objectObjectHashMap.put("true",trueTree);
+        objectObjectHashMap.put("false",falseMenuTree);
+
+        return objectObjectHashMap;
+    }
+
+
     /**
      * 根据父节点的ID获取所有子节点
      *

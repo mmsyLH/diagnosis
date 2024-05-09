@@ -1,5 +1,8 @@
 package asia.lhweb.diagnosis.service;
 
+import asia.lhweb.diagnosis.model.PageResult;
+import asia.lhweb.diagnosis.model.domain.SysUser;
+import asia.lhweb.diagnosis.model.dto.SysUserDTO;
 import asia.lhweb.diagnosis.model.vo.LoginUserVO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +20,7 @@ public interface SysUserService {
      * @param i 我
      * @return int
      */
-    int deleteById(int i);
+    boolean deleteById(int i);
 
     /**
      * 用户注销
@@ -38,4 +41,5 @@ public interface SysUserService {
      */
     LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
 
+    PageResult<SysUser> page(SysUserDTO sysUserDTO);
 }

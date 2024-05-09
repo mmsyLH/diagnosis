@@ -59,11 +59,14 @@ public class LogicalDeleteInterceptor implements Interceptor {
 
     private void handleDelete(Invocation invocation, MappedStatement mappedStatement, Object parameter) throws Throwable {
         Class<?> entityClass = getEntityClass(mappedStatement);
+        if(entityClass==null){
+            return;
+        }
         String deleteMarkerColumn = getDeleteMarkerColumnName(entityClass);
         String[] deleteMarkerValues = getDeleteMarkerValues(entityClass);
 
         String updatedSql = deleteToUpdateSql(mappedStatement.getBoundSql(parameter).getSql(), deleteMarkerColumn, deleteMarkerValues);
-
+        System.err.println("修改后的updatedSql:"+updatedSql);
         MappedStatement newMs = copyFromMappedStatement(mappedStatement, updatedSql);
         invocation.getArgs()[0] = newMs;
     }
@@ -71,6 +74,13 @@ public class LogicalDeleteInterceptor implements Interceptor {
     private void handleQueryOrUpdate(Invocation invocation, MappedStatement mappedStatement, Object parameter) throws Throwable {
         Class<?> entityClass = getEntityClass(mappedStatement);
         System.out.println("handleQueryOrUpdate():entityClass: " + entityClass);
+
+        // 检查实体类是否存在 @DeleteMarker 注解，如果不存在，则直接返回，跳过后续处理
+        if (!entityClass.isAnnotationPresent(DeleteMarker.class)) {
+            System.out.println("实体类没有这个注解");
+            return;
+        }
+
         String deleteMarkerColumn = getDeleteMarkerColumnName(entityClass);
         String activeValue = getDeleteMarkerValues(entityClass)[0];
 
@@ -104,9 +114,14 @@ public class LogicalDeleteInterceptor implements Interceptor {
 
         MyEntity entityAnnotation = mapperClass.getAnnotation(MyEntity.class);
         if (entityAnnotation != null) {
+            // 检查实体类是否存在 @DeleteMarker 注解，如果不存在，则直接返回，跳过后续处理
+            if (!mapperClass.isAnnotationPresent(DeleteMarker.class)) {
+                System.out.println("Entity class does not have @DeleteMarker annotation, skipping...");
+                return null;
+            }
             return entityAnnotation.value();
         } else {
-            throw new IllegalArgumentException("Entity class not found");
+            return null;
         }
     }
 
@@ -133,12 +148,28 @@ public class LogicalDeleteInterceptor implements Interceptor {
 
     private String deleteToUpdateSql(String sql, String deleteMarkerColumn, String[] deleteMarkerValues) {
         String activeValue = deleteMarkerValues[0];
+        System.err.println("activeValue:"+activeValue);
         String deletedValue = deleteMarkerValues[1];
+        System.err.println("deletedValue:"+deletedValue);
         String updatedSql = sql;
         System.err.println("updatedSql: " + updatedSql);
+        //单行
         updatedSql = updatedSql.replaceAll("(?i)DELETE FROM", "UPDATE")
                 .replaceAll(deleteMarkerColumn + "\\s*=\\s*" + activeValue, deleteMarkerColumn + " = " + deletedValue)
                 .replaceFirst("(?i)WHERE", "SET " + deleteMarkerColumn + " = " + deletedValue + " WHERE");
+        //可能多行
+        // Pattern pattern = Pattern.compile("(?i)DELETE FROM(.*)WHERE", Pattern.DOTALL);
+        // Matcher matcher = pattern.matcher(updatedSql);
+        // if (matcher.find()) {
+        //     updatedSql = updatedSql.substring(0, matcher.start())
+        //             + "UPDATE" + matcher.group(1)
+        //             + "SET " + deleteMarkerColumn + " = " + deletedValue
+        //             + " WHERE";
+        // }else{
+        //     updatedSql = updatedSql.replaceAll("(?i)DELETE FROM", "UPDATE")
+        //             .replaceAll(deleteMarkerColumn + "\\s*=\\s*" + activeValue, deleteMarkerColumn + " = " + deletedValue)
+        //             .replaceFirst("(?i)WHERE", "SET " + deleteMarkerColumn + " = " + deletedValue + " WHERE");
+        // }
         return updatedSql;
     }
 

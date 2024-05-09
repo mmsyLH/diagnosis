@@ -1,14 +1,16 @@
 package asia.lhweb.diagnosis.model.domain;
 
-import java.io.Serializable;
+import asia.lhweb.diagnosis.model.PageRequest;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 系统角色菜单关联表
  * @TableName sys_role_menu
  */
 @Data
-public class SysRoleMenu implements Serializable {
+public class SysRoleMenu extends PageRequest implements Serializable {
     /**
      * 系统角色菜单关联表id
      */

@@ -4,7 +4,6 @@ import asia.lhweb.diagnosis.annotation.DeleteMarker;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 系统用户表
@@ -70,12 +69,12 @@ public class SysUser implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 
      */
-    private Date updateTime;
+    private String updateTime;
 
     /**
      * 逻辑删除 0不删除 1删除

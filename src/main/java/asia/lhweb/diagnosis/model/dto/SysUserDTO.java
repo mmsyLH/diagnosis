@@ -1,5 +1,6 @@
 package asia.lhweb.diagnosis.model.dto;
 
+import asia.lhweb.diagnosis.model.PageRequest;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -11,7 +12,7 @@ import java.util.Date;
  * @TableName sys_user
  */
 @Data
-public class SysUserDTO implements Serializable {
+public class SysUserDTO extends PageRequest implements Serializable {
     /**
      * 系统用户表id
      */

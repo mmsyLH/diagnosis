@@ -1,19 +1,18 @@
-package asia.lhweb.diagnosis.model.vo;
+package asia.lhweb.diagnosis.model.dto;
 
+import asia.lhweb.diagnosis.model.PageRequest;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 系统后台
  * @TableName sys_admin
  */
 @Data
-public class LoginAdminVO implements Serializable {
-    /**
-     * 管理员表Id
-     */
-    private Integer id;
+public class SysAdminDTO  extends PageRequest implements Serializable{
+
     /**
      * 系统管理员账户
      */
@@ -30,6 +29,16 @@ public class LoginAdminVO implements Serializable {
     private String adminName;
 
     /**
+     * 由后台管理员分配的权限
+     */
+    private Integer adminRoleId;
+
+    /**
+     * 0 禁用 1启用
+     */
+    private Integer status;
+
+    /**
      * 手机号
      */
     private String phone;
@@ -42,14 +51,12 @@ public class LoginAdminVO implements Serializable {
     /**
      * 创建时间
      */
-    private String createTime;
-    /**
-     * 由后台管理员分配的权限
-     */
-    private Integer adminRoleId;
-    /**
-     * 令牌
-     */
-    private String token;
+    private Date createTime;
 
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    private static final long serialVersionUID = 1L;
 }

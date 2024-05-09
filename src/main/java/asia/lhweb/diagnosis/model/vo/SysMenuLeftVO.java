@@ -62,8 +62,22 @@ public class SysMenuLeftVO implements Serializable {
      */
     private String updateTime;
 
+    /**
+     * 是否添加
+     */
+    private boolean isAdd;
+
+    public boolean getIsAdd() {
+        return isAdd;
+    }
+
+    public void setIsAdd(boolean add) {
+        isAdd = add;
+    }
 
     private List<SysMenuLeftVO> sysMenuLeftVOList;
     
     private static final long serialVersionUID = 1L;
+
+
 }

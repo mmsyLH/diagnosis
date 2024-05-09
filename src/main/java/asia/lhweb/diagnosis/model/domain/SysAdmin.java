@@ -1,8 +1,8 @@
 package asia.lhweb.diagnosis.model.domain;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 系统后台
@@ -53,12 +53,12 @@ public class SysAdmin implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private String updateTime;
 
     /**
      * 0未删除 1删除

@@ -1,20 +1,20 @@
 package asia.lhweb.diagnosis.controller.admin;
 
 import asia.lhweb.diagnosis.common.BaseResponse;
-import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.common.ResultUtils;
+import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.constant.BaseConstant;
 import asia.lhweb.diagnosis.exception.BusinessException;
+import asia.lhweb.diagnosis.model.PageResult;
+import asia.lhweb.diagnosis.model.domain.SysUser;
 import asia.lhweb.diagnosis.model.dto.LoginUserDTO;
+import asia.lhweb.diagnosis.model.dto.SysUserDTO;
 import asia.lhweb.diagnosis.model.vo.LoginUserVO;
 import asia.lhweb.diagnosis.service.SysUserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date : 2024/4/28
  * ("/user/user/")
  */
-@ApiOperation("管理员相关接口")
+@ApiOperation("用户相关接口")
 @RestController
 @RequestMapping("/admin/user/")
 public class UserController {
@@ -86,4 +86,23 @@ public class UserController {
         return ResultUtils.success(loginUserVO, BaseConstant.USER_LOGIN_SUCCESS);
     }
 
+    /**
+     * 获取分页列表
+     *
+     * @param sysUserDTO 系统用户dto
+     * @return {@link BaseResponse}<{@link PageResult}<{@link SysUser}>>
+     */
+    @GetMapping("/page")
+    @ApiOperation("获取分页列表")
+    public BaseResponse<PageResult<SysUser>> page(SysUserDTO sysUserDTO) {
+        PageResult<SysUser> sysAdminPageResult = userService.page(sysUserDTO);
+        return ResultUtils.success(sysAdminPageResult);
+    }
+
+    @GetMapping("/delete")
+    @ApiOperation("删除用户")
+    public BaseResponse<Boolean> deleteById(@RequestParam("id") Integer id) {
+        boolean res = userService.deleteById(id);
+        return ResultUtils.success(res);
+    }
 }

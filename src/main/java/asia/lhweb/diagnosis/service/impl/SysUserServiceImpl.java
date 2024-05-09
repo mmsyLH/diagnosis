@@ -5,9 +5,13 @@ import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.constant.BaseConstant;
 import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.mapper.SysUserMapper;
+import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.SysUser;
+import asia.lhweb.diagnosis.model.dto.SysUserDTO;
 import asia.lhweb.diagnosis.model.vo.LoginUserVO;
 import asia.lhweb.diagnosis.service.SysUserService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
@@ -35,10 +39,14 @@ implements SysUserService{
      * @return int
      */
     @Override
-    public int deleteById(int i) {
+    public boolean deleteById(int i) {
         Long id=Long.valueOf(i);
         int res=sysUserMapper.deleteByPrimaryKey(id);
-        return res;
+        if (res<=0){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "删除失败");
+        }
+
+        return true;
     }
 
     /**
@@ -98,6 +106,31 @@ implements SysUserService{
         LoginUserVO cleanUser = getSafetyUser(user);
 
         return cleanUser;
+    }
+
+    /**
+     * 获取分页列表
+     *
+     * @param sysUserDTO 系统用户dto
+     * @return {@link PageResult}<{@link SysUser}>
+     */
+    @Override
+    public PageResult<SysUser> page(SysUserDTO sysUserDTO) {
+        int pageNo = sysUserDTO.getPageNo();
+        int pageSize = sysUserDTO.getPageSize();
+        PageHelper.startPage(pageNo, pageSize);
+        // 紧跟着的第一个select方法会被分页
+        Page<SysUser> adminPage = sysUserMapper.selectAllIf(sysUserDTO);
+        if (adminPage == null || adminPage.getResult().size() == 0) {
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+        PageResult<SysUser> pageResult = new PageResult<>();
+        pageResult.setPageNo(pageNo);
+        pageResult.setPageSize(pageSize);
+        pageResult.setTotalRow((int) adminPage.getTotal());
+        pageResult.setItems(adminPage.getResult());
+        pageResult.setPageTotalCount(adminPage.getPages());
+        return pageResult;
     }
 
     /**

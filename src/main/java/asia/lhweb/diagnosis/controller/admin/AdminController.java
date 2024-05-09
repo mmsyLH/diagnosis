@@ -1,21 +1,21 @@
 package asia.lhweb.diagnosis.controller.admin;
 
 import asia.lhweb.diagnosis.common.BaseResponse;
-import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.common.ResultUtils;
+import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.constant.BaseConstant;
 import asia.lhweb.diagnosis.exception.BusinessException;
+import asia.lhweb.diagnosis.model.PageResult;
+import asia.lhweb.diagnosis.model.domain.SysAdmin;
 import asia.lhweb.diagnosis.model.dto.LoginAdminDTO;
+import asia.lhweb.diagnosis.model.dto.SysAdminDTO;
 import asia.lhweb.diagnosis.model.vo.LoginAdminVO;
 import asia.lhweb.diagnosis.service.SysAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,14 +26,15 @@ import javax.servlet.http.HttpServletRequest;
  * ("/user/user/")
  */
 @Api("管理员相关接口")
+@ApiOperation("管理员相关接口")
 @RestController
-@RequestMapping("/admin/admin/")
+@RequestMapping("/admin/admin")
 public class AdminController {
     @Resource
     private SysAdminService sysAdminService;
 
     @Resource
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
     // @ApiOperation("用户注册")
     // @PostMapping("/register")
     // public BaseResponse<Long> UserRegister(@RequestBody RegisterUserDTO userRegisterRequest) {
@@ -63,7 +64,7 @@ public class AdminController {
 
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public BaseResponse<LoginAdminVO>  adminLogin(@RequestBody LoginAdminDTO loginAdminDTO, HttpServletRequest  request) {
+    public BaseResponse<LoginAdminVO> adminLogin(@RequestBody LoginAdminDTO loginAdminDTO, HttpServletRequest request) {
         if (loginAdminDTO == null) {
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
@@ -71,21 +72,34 @@ public class AdminController {
         String sysPassword = loginAdminDTO.getSysPassword();
         String code = loginAdminDTO.getCode();
         if (!StringUtils.hasLength(sysAccount)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR,"账户不能为空");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "账户不能为空");
         }
         if (!StringUtils.hasLength(sysPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR,"密码不能为空");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码不能为空");
         }
         String codeStr = (String) request.getSession().getAttribute(BaseConstant.CODE_KEY);
-        if (!StringUtils.hasLength(code)||!StringUtils.hasLength(codeStr)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR,"验证码不能为空，请重新获取验证码");
+        if (!StringUtils.hasLength(code) || !StringUtils.hasLength(codeStr)) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码不能为空，请重新获取验证码");
         }
 
         if (!codeStr.equals(code)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR,"验证码错误");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错误");
         }
         LoginAdminVO loginAdminVO = sysAdminService.adminLogin(sysAccount, sysPassword, request);
         return ResultUtils.success(loginAdminVO, BaseConstant.ADMIN_LOGIN_SUCCESS);
+    }
+
+    /**
+     * 获取分页列表
+     *
+     * @param sysAdminDTO 系统管理员
+     * @return {@link BaseResponse}<{@link PageResult}<{@link SysAdmin}>>
+     */
+    @GetMapping("/page")
+    @ApiOperation("获取分页列表")
+    public BaseResponse<PageResult<SysAdmin>> page(SysAdminDTO sysAdminDTO) {
+        PageResult<SysAdmin> sysAdminPageResult = sysAdminService.page(sysAdminDTO);
+        return ResultUtils.success(sysAdminPageResult);
     }
 
     /**
@@ -94,12 +108,13 @@ public class AdminController {
      * @param request 请求
      * @return {@link BaseResponse}<{@link LoginAdminVO}>
      */
-    // public BaseResponse<LoginAdminVO>  getInfo(HttpServletRequest  request) {
-    //     //判断登录的是否是本人 或者是管理员
-    //     String tokenStr = request.getHeader(BaseConstant.TOKEN_NAME);
-    //     if (!StringUtils.hasLength(tokenStr)){
-    //         throw  new BusinessException(ErrorCode.PARAMS_ERROR,"token不能为空");
-    //     }
-    //
-    // }
+    public BaseResponse<LoginAdminVO> getInfo(HttpServletRequest request) {
+        LoginAdminVO loginAdminVO = sysAdminService.getLoginAdminVO(request);
+        if (loginAdminVO == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户未登录");
+        }
+        return ResultUtils.success(loginAdminVO);
+    }
+
+
 }

@@ -1,14 +1,16 @@
 package asia.lhweb.diagnosis.model.domain;
 
-import java.io.Serializable;
+import asia.lhweb.diagnosis.model.PageRequest;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 系统角色表
  * @TableName sys_role
  */
 @Data
-public class SysRole implements Serializable {
+public class SysRole extends PageRequest implements Serializable {
     /**
      * 系统角色id
      */

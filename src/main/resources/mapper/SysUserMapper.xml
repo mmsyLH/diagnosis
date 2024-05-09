@@ -48,6 +48,29 @@
         and user_password = #{userPassword}
         and is_delete!=1
     </select>
+    <select id="selectAllIf" resultType="asia.lhweb.diagnosis.model.domain.SysUser">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        <where>
+            <if test="userAccount!=null">
+                and user_account = #{userAccount}
+            </if>
+            <if test="userPassword!=null">
+                and user_password = #{userPassword}
+            </if>
+            <if test="userName!=null">
+                AND user_name LIKE CONCAT('%',#{userName},'%')
+            </if>
+            <if test="sex!=null">
+                and sex = #{sex}
+            </if>
+            <if test="age!=null">
+                and age = #{age}
+            </if>
+            and is_delete=0
+        </where>
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete

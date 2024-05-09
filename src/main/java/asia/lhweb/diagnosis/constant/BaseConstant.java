@@ -65,4 +65,8 @@ public interface BaseConstant {
      */
     String LOGIN_ADMIN_KEY = "login_admin_key";
     String LOGIN_USER_KEY = "login_user_key";
+    /**
+     * 超级管理员id
+     */
+    Integer SUPER_ADMIN_ID = 3;
 }

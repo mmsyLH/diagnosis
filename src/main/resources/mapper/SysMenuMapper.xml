@@ -29,7 +29,7 @@
         select
         <include refid="Base_Column_List" />
         from sys_menu
-        where  id = #{id,jdbcType=INTEGER} 
+        where  id = #{id,jdbcType=INTEGER}
     </select>
     <select id="selectMenuTreeByAdminId" resultType="asia.lhweb.diagnosis.model.vo.SysMenuLeftVO">
         SELECT
@@ -62,10 +62,42 @@
             sm.menu_sort;
 
     </select>
+    <select id="selectAllMenuTree" resultType="asia.lhweb.diagnosis.model.vo.SysMenuLeftVO">
+        select  <include refid="Base_Column_List" />
+        from sys_menu
+    </select>
+    <select id="selectMenuTreeByRoleId" resultType="asia.lhweb.diagnosis.model.vo.SysMenuLeftVO">
+        SELECT
+            sm.id,
+            menu_name,
+            menu_component,
+            menu_path,
+            menu_icon,
+            menu_status,
+            menu_parent_id,
+            menu_is_hidden,
+            menu_sort,
+            sm.create_time,
+            sm.update_time,
+            sm.is_delete,
+
+            sr.id AS sr_id,
+            rm.id AS rm_id,
+            sm.id AS sm_id
+        FROM
+            sys_role sr
+                LEFT JOIN sys_role_menu rm ON rm.role_id = sr.sys_role_id
+                LEFT JOIN sys_menu sm ON rm.menu_id = sm.id
+        WHERE
+            sr.sys_role_id = #{roleId}
+          AND sm.is_delete = 0
+        ORDER BY
+            sm.menu_sort;
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from sys_menu
-        where  id = #{id,jdbcType=INTEGER} 
+        where  id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.SysMenu" useGeneratedKeys="true">
         insert into sys_menu
@@ -148,11 +180,11 @@
                     is_delete = #{isDelete,jdbcType=INTEGER},
                 </if>
         </set>
-        where   id = #{id,jdbcType=INTEGER} 
+        where   id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.SysMenu">
         update sys_menu
-        set 
+        set
             menu_name =  #{menuName,jdbcType=VARCHAR},
             menu_component =  #{menuComponent,jdbcType=VARCHAR},
             menu_path =  #{menuPath,jdbcType=VARCHAR},
@@ -164,6 +196,6 @@
             create_time =  #{createTime,jdbcType=TIMESTAMP},
             update_time =  #{updateTime,jdbcType=TIMESTAMP},
             is_delete =  #{isDelete,jdbcType=INTEGER}
-        where   id = #{id,jdbcType=INTEGER} 
+        where   id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

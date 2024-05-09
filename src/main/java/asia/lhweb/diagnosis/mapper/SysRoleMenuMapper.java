@@ -1,6 +1,9 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.SysRoleMenu;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -22,4 +25,8 @@ public interface SysRoleMenuMapper {
 
     int updateByPrimaryKey(SysRoleMenu record);
 
+
+    int deleteRoleByRouleIdAndMenuIdS(@Param("menuIdS") List<Integer> menuIdS,@Param("adminRoleId") Integer adminRoleId);
+
+    int insertRoleByRouleIdAndMenuIdS(@Param("menuIds") List<Integer> menuIds, @Param("adminRoleId") Integer adminRoleId);
 }
