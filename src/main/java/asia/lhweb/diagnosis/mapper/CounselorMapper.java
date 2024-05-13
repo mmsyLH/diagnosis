@@ -5,6 +5,8 @@ import asia.lhweb.diagnosis.model.domain.Counselor;
 import asia.lhweb.diagnosis.model.dto.CounselorDTO;
 import com.github.pagehelper.Page;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【counselor(咨询师表)】的数据库操作Mapper
@@ -27,4 +29,6 @@ public interface CounselorMapper {
     int updateByPrimaryKey(Counselor record);
 
     Page<Counselor> selectAllIf(CounselorDTO counselorDTO);
+
+    List<Counselor> getCounselorListByAreaId(Integer areaId);
 }

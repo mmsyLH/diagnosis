@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.Appointment;
+import com.github.pagehelper.Page;
 
 /**
 * @author Administrator
@@ -22,4 +23,5 @@ public interface AppointmentMapper {
 
     int updateByPrimaryKey(Appointment record);
 
+    Page<Appointment> selectAppointmentList(Appointment appointment);
 }

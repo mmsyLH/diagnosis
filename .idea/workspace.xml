@@ -9,43 +9,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9d846b5-0a98-4c2e-9269-754a3aaa2d8b" name="变更" comment="1.2.0 完成用户管理、咨询师管理、超级管理员对角色的权限分配。">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alipay_sdk_alipay_sdk_java_3_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_core_3_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_ecs_4_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_kms_2_7_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_ram_3_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_aliyun_java_sdk_sts_3_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_oss_aliyun_sdk_oss_3_10_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_4_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jettison_jettison_1_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jdom_jdom2_2_0_6.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/config/AliOssProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/config/AlipayConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/config/OssConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/common/PayController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/AlipayBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/PayService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/PayServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/Alipay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ali-oss.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/diagnosis_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/diagnosis_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_30.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_32.xml" afterDir="false" />
+    <list default="true" id="d9d846b5-0a98-4c2e-9269-754a3aaa2d8b" name="变更" comment="1.3.0 完成头像上传、沙箱支付。">
+      <change afterPath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/AppointmentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/AreaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/user/CounselorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/dto/WorkScheduleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/vo/CounselorAppointmentStatisticsVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/vo/SysUserStatisticsVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/vo/WorkScheduleVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/25e563b8-bd6e-40f3-b47a-40e93ccc1c5b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/25e563b8-bd6e-40f3-b47a-40e93ccc1c5b.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mybatisx/templates.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mybatisx/templates.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagnosis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/diagnosis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/CounselorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/CounselorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/common/CommonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/common/CommonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/interceptor/LoginInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/interceptor/LoginInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/AliOssUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/AliOssUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/Base64Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/Base64Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/DataUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/data/DataUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/common/PayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/common/PayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/AppointmentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/AppointmentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/AreaMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/AreaMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/CounselorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/CounselorMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/QuestionBankMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/QuestionBankMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/QuestionBankReportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/QuestionBankReportMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysLogMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysMenuMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysMenuMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/SysUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/WorkScheduleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/mapper/WorkScheduleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Diagnosis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/Diagnosis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/QuestionBank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/QuestionBank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/QuestionBankReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/QuestionBankReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/WorkSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/model/domain/WorkSchedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/AppointmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/AppointmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/AreaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/AreaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/CounselorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/CounselorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/SysMenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/SysMenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/SysUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/SysUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/WorkScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/WorkScheduleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/AppointmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/AreaServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/AreaServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/CounselorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/CounselorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/SysMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/SysMenuServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/SysUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/SysUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/WorkScheduleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/WorkScheduleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/data/MenuTreeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/utils/data/MenuTreeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/AppointmentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AppointmentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/CounselorMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CounselorMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/QuestionBankMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/QuestionBankMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/QuestionBankReportMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/QuestionBankReportMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysMenuMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysMenuMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SysUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SysUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/WorkScheduleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/WorkScheduleMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +123,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "MyBatisLogPluginindexNum": "1891",
+    "MyBatisLogPluginindexNum": "1997",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -117,7 +133,7 @@
     "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.15619047",
     "project.structure.side.proportion": "0.31865585",
-    "settings.editor.selected.configurable": "easydoc.common.settings",
+    "settings.editor.selected.configurable": "com.itangcent.idea.plugin.configurable.AccountConfigurable.apifox",
     "spring.configuration.checksum": "2653c64cd61ebf1701be2c974c4e14af"
   },
   "keyToStringList": {
@@ -143,11 +159,11 @@
       <recent name="F:\cykjWorkSpacrce\diagnosis\src\main\java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="asia.lhweb.diagnosis.model.vo" />
       <recent name="asia.lhweb.diagnosis.model.dto" />
       <recent name="asia.lhweb.diagnosis.model" />
       <recent name="asia.lhweb.diagnosis.enums" />
       <recent name="asia.lhweb.diagnosis.utils.data" />
-      <recent name="asia.lhweb.diagnosis.annotation" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat 服务器.Tomcat 9.0.24">
@@ -307,7 +323,15 @@
       <workItem from="1715086265448" duration="2575000" />
       <workItem from="1715129470933" duration="12466000" />
       <workItem from="1715215371520" duration="12164000" />
-      <workItem from="1715233030908" duration="9922000" />
+      <workItem from="1715233030908" duration="16106000" />
+      <workItem from="1715258453968" duration="3187000" />
+      <workItem from="1715302205187" duration="30545000" />
+      <workItem from="1715354437554" duration="2752000" />
+      <workItem from="1715389728324" duration="8263000" />
+      <workItem from="1715402912056" duration="12972000" />
+      <workItem from="1715485314171" duration="4009000" />
+      <workItem from="1715500616411" duration="3396000" />
+      <workItem from="1715562247490" duration="15570000" />
     </task>
     <task id="LOCAL-00001" summary="1.0.1 完成所有mapper的基础增删改查。redis的引入，完成逻辑删除的注解（更新和查询还有bug 暂时放弃）">
       <created>1714454989321</created>
@@ -330,7 +354,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715221664661</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="1.3.0 完成头像上传、沙箱支付。">
+      <created>1715244972757</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715244972757</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,7 +402,9 @@
     <MESSAGE value="1.0.1 完成所有mapper的基础增删改查。redis的引入，完成逻辑删除的注解（更新和查询还有bug 暂时放弃）" />
     <MESSAGE value="1.1.0 完成单点登录、获取管理员树形菜单。" />
     <MESSAGE value="1.2.0 完成用户管理、咨询师管理、超级管理员对角色的权限分配。" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.2.0 完成用户管理、咨询师管理、超级管理员对角色的权限分配。" />
+    <MESSAGE value="1.2.0 完成头像上传、沙箱支付。" />
+    <MESSAGE value="1.3.0 完成头像上传、沙箱支付。" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.3.0 完成头像上传、沙箱支付。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -388,24 +421,25 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/service/impl/SysUserServiceImpl.java</url>
-          <line>77</line>
+          <line>84</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/UserController.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="27" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/asia/lhweb/diagnosis/controller/admin/AdminController.java</url>
+          <line>99</line>
+          <properties class="asia.lhweb.diagnosis.controller.admin.AdminController" method="page">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="org.apache.ibatis.binding.BindingException" package="org.apache.ibatis.binding" />
-          <option name="timeStamp" value="53" />
-        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.apache.ibatis.mapping.MappedStatement" memberName="id" />
         <PinnedItemInfo parentTag="org.apache.ibatis.mapping.MappedStatement" memberName="configuration" />
+        <PinnedItemInfo parentTag="java.util.ArrayList" memberName="elementData" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>

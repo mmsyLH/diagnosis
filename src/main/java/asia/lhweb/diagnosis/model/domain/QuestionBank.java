@@ -21,12 +21,22 @@ public class QuestionBank implements Serializable {
     private Integer areaId;
 
     /**
+     * 标题名称
+     */
+    private String title;
+
+    /**
+     * 题库描述
+     */
+    private String questioninfo;
+
+    /**
      * 题目json字符串
      */
     private String question;
 
     /**
-     * 结果
+     * 结果json字符串
      */
     private String result;
 

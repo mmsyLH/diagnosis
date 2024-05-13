@@ -1,6 +1,10 @@
 package asia.lhweb.diagnosis.service;
 
 
+import asia.lhweb.diagnosis.common.BaseResponse;
+import asia.lhweb.diagnosis.model.domain.Area;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -9,4 +13,5 @@ package asia.lhweb.diagnosis.service;
 */
 public interface AreaService{
 
+    BaseResponse<List<Area>> getAreaList();
 }

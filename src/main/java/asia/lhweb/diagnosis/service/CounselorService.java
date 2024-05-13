@@ -1,9 +1,14 @@
 package asia.lhweb.diagnosis.service;
 
 
+import asia.lhweb.diagnosis.common.BaseResponse;
 import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.Counselor;
 import asia.lhweb.diagnosis.model.dto.CounselorDTO;
+import asia.lhweb.diagnosis.model.vo.CounselorAppointmentStatisticsVO;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -27,4 +32,21 @@ public interface CounselorService {
      * @return boolean
      */
     boolean deleteById(int id);
+
+    /**
+     * 获取指定时间预约量来源于哪些咨询师
+     *
+     * @param begin 开始
+     * @param end   结束
+     * @return {@link CounselorAppointmentStatisticsVO}
+     */
+    CounselorAppointmentStatisticsVO getCountCAStatistics(LocalDate begin, LocalDate end);
+
+    /**
+     * 按区域id获取辅导员名单
+     *
+     * @param areaId 区域id
+     * @return {@link BaseResponse}<{@link List}<{@link Counselor}>>
+     */
+    BaseResponse<List<Counselor>> getCounselorListByAreaId(Integer areaId);
 }

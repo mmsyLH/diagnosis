@@ -10,7 +10,7 @@
             <result property="counselorId" column="counselor_id" jdbcType="INTEGER"/>
             <result property="areaId" column="area_id" jdbcType="INTEGER"/>
             <result property="appointmentDate" column="appointment_date" jdbcType="DATE"/>
-            <result property="appointmentTime" column="appointment_time" jdbcType="TIME"/>
+            <result property="appointmentTime" column="appointment_time" />
             <result property="appointmentDescription" column="appointment_description" jdbcType="VARCHAR"/>
             <result property="appointmentReply" column="appointment_reply" jdbcType="VARCHAR"/>
             <result property="status" column="status" jdbcType="INTEGER"/>
@@ -27,6 +27,27 @@
         price,create_time,update_time,
         is_delete
     </sql>
+
+    <select id="selectAppointmentList" resultType="asia.lhweb.diagnosis.model.domain.Appointment">
+        select
+        <include refid="Base_Column_List" />
+        from appointment
+        <where>
+            <if test="counselorId != null">
+                and counselor_id = #{counselorId}
+            </if>
+            <if test="appointmentDate != null">
+                and appointment_date = #{appointmentDate}
+            </if>
+            <if test="appointmentTime != null">
+                and appointment_time = #{appointmentTime}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            and is_delete = 0
+        </where>
+    </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select

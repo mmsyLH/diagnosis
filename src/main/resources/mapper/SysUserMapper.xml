@@ -71,6 +71,11 @@
             and is_delete=0
         </where>
     </select>
+    <select id="countNewUsersByDateRange" resultType="java.lang.Integer">
+        select count(*)
+        from sys_user
+        where create_time between #{beginTime} and #{endTime}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete

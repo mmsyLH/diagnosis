@@ -7,8 +7,8 @@
     <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.WorkSchedule">
             <result property="id" column="id" jdbcType="INTEGER"/>
             <result property="counselorId" column="counselor_id" jdbcType="INTEGER"/>
-            <result property="date" column="date" jdbcType="DATE"/>
-            <result property="timeSlot" column="time_slot" jdbcType="TIME"/>
+            <result property="date" column="date"/>
+            <result property="timeSlot" column="time_slot" jdbcType="VARCHAR"/>
             <result property="status" column="status" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -23,10 +23,43 @@
         from work_schedule
         where 
     </select>
+    <select id="selectAllByCounselorId" resultType="asia.lhweb.diagnosis.model.domain.WorkSchedule">
+        select
+        <include refid="Base_Column_List" />
+        from work_schedule
+        where counselor_id = #{counselorId}
+        and date between #{begin} and #{end}
+    </select>
+    <select id="selectListByCounselorId" resultType="asia.lhweb.diagnosis.model.domain.WorkSchedule">
+        select
+        <include refid="Base_Column_List" />
+        from work_schedule
+        where counselor_id = #{counselorId}
+    </select>
+    <select id="selectByWorkScheduleSelective" resultType="asia.lhweb.diagnosis.model.domain.WorkSchedule">
+        select
+        <include refid="Base_Column_List" />
+        from work_schedule
+        <where>
+        <if test="id != null">
+            id = #{id}
+        </if>
+        <if test="counselorId != null">
+            and counselor_id = #{counselorId}
+        </if>
+        <if test="date != null">
+            and date = #{date}
+        </if>
+        <if test="timeSlot != null">
+            and time_slot= #{timeSlot}
+        </if>
+        </where>
+    </select>
+
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from work_schedule
-        where 
+        where id = #{id}
     </delete>
     <insert id="insert">
         insert into work_schedule

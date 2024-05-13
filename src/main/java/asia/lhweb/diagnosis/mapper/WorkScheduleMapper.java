@@ -1,6 +1,10 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.WorkSchedule;
+import org.apache.ibatis.annotations.Param;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -21,5 +25,11 @@ public interface WorkScheduleMapper {
     int updateByPrimaryKeySelective(WorkSchedule record);
 
     int updateByPrimaryKey(WorkSchedule record);
+
+    List<WorkSchedule> selectAllByCounselorId(@Param("counselorId") Integer counselorId, @Param("begin") LocalDate begin, @Param("end") LocalDate end);
+
+    List<WorkSchedule> selectListByCounselorId(Integer counselorId);
+
+    WorkSchedule selectByWorkScheduleSelective(WorkSchedule workSchedule);
 
 }

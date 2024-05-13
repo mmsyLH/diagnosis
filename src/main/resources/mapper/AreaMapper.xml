@@ -19,6 +19,11 @@
         from area
         where  id = #{id,jdbcType=INTEGER} 
     </select>
+    <select id="getAreaList" resultType="asia.lhweb.diagnosis.model.domain.Area">
+        select
+        <include refid="Base_Column_List" />
+        from area
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from area

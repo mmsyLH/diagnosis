@@ -1,5 +1,6 @@
-package asia.lhweb.diagnosis.model.domain;
+package asia.lhweb.diagnosis.model.vo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -9,21 +10,8 @@ import java.io.Serializable;
  * @TableName work_schedule
  */
 @Data
-public class WorkSchedule implements Serializable {
-    /**
-     * 
-     */
-    private Integer id;
-
-    /**
-     * 咨询师id
-     */
-    private Integer counselorId;
-
-    /**
-     * 日期
-     */
-    private String date;
+@Builder
+public class WorkScheduleVO implements Serializable {
 
     /**
      * 排班的时间段字符串。例如'11:00 - 12:00'
@@ -34,6 +22,7 @@ public class WorkSchedule implements Serializable {
      * 2预约 1空闲
      */
     private Integer status;
+
 
     private static final long serialVersionUID = 1L;
 }

@@ -7,6 +7,8 @@
     <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.QuestionBank">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="areaId" column="area_id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="questioninfo" column="questionInfo" jdbcType="VARCHAR"/>
             <result property="question" column="question" jdbcType="VARCHAR"/>
             <result property="result" column="result" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -15,9 +17,9 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,area_id,question,
-        result,create_time,update_time,
-        is_detele
+        id,area_id,title,
+        questionInfo,question,result,
+        create_time,update_time,is_detele
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -33,18 +35,22 @@
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBank" useGeneratedKeys="true">
         insert into question_bank
-        ( id,area_id,question
-        ,result,create_time,update_time
-        ,is_detele)
-        values (#{id,jdbcType=INTEGER},#{areaId,jdbcType=INTEGER},#{question,jdbcType=VARCHAR}
-        ,#{result,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
-        ,#{isDetele,jdbcType=INTEGER})
+        ( id,area_id,title
+        ,questionInfo,question,result
+        ,create_time,update_time,is_detele
+        )
+        values (#{id,jdbcType=INTEGER},#{areaId,jdbcType=INTEGER},#{title,jdbcType=VARCHAR}
+        ,#{questioninfo,jdbcType=VARCHAR},#{question,jdbcType=VARCHAR},#{result,jdbcType=VARCHAR}
+        ,#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{isDetele,jdbcType=INTEGER}
+        )
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBank" useGeneratedKeys="true">
         insert into question_bank
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
                 <if test="areaId != null">area_id,</if>
+                <if test="title != null">title,</if>
+                <if test="questioninfo != null">questionInfo,</if>
                 <if test="question != null">question,</if>
                 <if test="result != null">result,</if>
                 <if test="createTime != null">create_time,</if>
@@ -54,6 +60,8 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="id != null">#{id,jdbcType=INTEGER},</if>
                 <if test="areaId != null">#{areaId,jdbcType=INTEGER},</if>
+                <if test="title != null">#{title,jdbcType=VARCHAR},</if>
+                <if test="questioninfo != null">#{questioninfo,jdbcType=VARCHAR},</if>
                 <if test="question != null">#{question,jdbcType=VARCHAR},</if>
                 <if test="result != null">#{result,jdbcType=VARCHAR},</if>
                 <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
@@ -66,6 +74,12 @@
         <set>
                 <if test="areaId != null">
                     area_id = #{areaId,jdbcType=INTEGER},
+                </if>
+                <if test="title != null">
+                    title = #{title,jdbcType=VARCHAR},
+                </if>
+                <if test="questioninfo != null">
+                    questionInfo = #{questioninfo,jdbcType=VARCHAR},
                 </if>
                 <if test="question != null">
                     question = #{question,jdbcType=VARCHAR},
@@ -89,6 +103,8 @@
         update question_bank
         set 
             area_id =  #{areaId,jdbcType=INTEGER},
+            title =  #{title,jdbcType=VARCHAR},
+            questionInfo =  #{questioninfo,jdbcType=VARCHAR},
             question =  #{question,jdbcType=VARCHAR},
             result =  #{result,jdbcType=VARCHAR},
             create_time =  #{createTime,jdbcType=TIMESTAMP},

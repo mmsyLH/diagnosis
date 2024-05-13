@@ -1,8 +1,9 @@
 package asia.lhweb.diagnosis.model.domain;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 诊断表
@@ -46,4 +47,5 @@ public class Diagnosis implements Serializable {
     private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
+
 }

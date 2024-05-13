@@ -6,6 +6,7 @@ import asia.lhweb.diagnosis.model.dto.SysUserDTO;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -34,4 +35,6 @@ public interface SysUserMapper {
     SysUser selectOne(@Param("userAccount") String userAccount, @Param("userPassword") String encryptPassword);
 
     Page<SysUser> selectAllIf(SysUserDTO sysUserDTO);
+
+    Integer countNewUsersByDateRange(@Param("beginTime") LocalDateTime beginTime, @Param("endTime") LocalDateTime endTime);
 }

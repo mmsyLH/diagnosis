@@ -7,6 +7,7 @@ import asia.lhweb.diagnosis.constant.BaseConstant;
 import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.utils.AliOssUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +25,7 @@ import java.util.UUID;
 @CrossOrigin
 @RestController
 @RequestMapping("/common")
+@Api("通用接口")
 public class CommonController {
     @Resource
     private DefaultKaptcha defaultKaptcha;

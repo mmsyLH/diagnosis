@@ -2,6 +2,8 @@ package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.Area;
 
+import java.util.List;
+
 /**
 * @author Administrator
 * @description 针对表【area(领域表)】的数据库操作Mapper
@@ -22,4 +24,5 @@ public interface AreaMapper {
 
     int updateByPrimaryKey(Area record);
 
+    List<Area> getAreaList();
 }

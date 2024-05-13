@@ -1,18 +1,24 @@
 package asia.lhweb.diagnosis.service.impl;
 
 
+import asia.lhweb.diagnosis.common.BaseResponse;
+import asia.lhweb.diagnosis.common.ResultUtils;
 import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.mapper.CounselorMapper;
+import asia.lhweb.diagnosis.mapper.SysAdminCounselorMapper;
 import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.Counselor;
 import asia.lhweb.diagnosis.model.dto.CounselorDTO;
+import asia.lhweb.diagnosis.model.vo.CounselorAppointmentStatisticsVO;
 import asia.lhweb.diagnosis.service.CounselorService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
 * @author Administrator
@@ -24,6 +30,8 @@ public class CounselorServiceImpl
 implements CounselorService{
     @Resource
     private CounselorMapper counselorMapper;
+    @Resource
+    private SysAdminCounselorMapper sysAdminCounselorMapper;
 
     /**
      * 页面
@@ -59,5 +67,32 @@ implements CounselorService{
     @Override
     public boolean deleteById(int id) {
         return counselorMapper.deleteByPrimaryKey((long) id) > 0;
+    }
+
+    /**
+     * 获取指定时间预约量来源于哪些咨询师
+     *
+     * @param begin 开始
+     * @param end   结束
+     * @return {@link CounselorAppointmentStatisticsVO}
+     */
+    @Override
+    public CounselorAppointmentStatisticsVO getCountCAStatistics(LocalDate begin, LocalDate end) {
+        return null;
+    }
+
+    /**
+     * 按区域id获取辅导员名单
+     *
+     * @param areaId 区域id
+     * @return {@link BaseResponse}<{@link List}<{@link Counselor}>>
+     */
+    @Override
+    public BaseResponse<List<Counselor>> getCounselorListByAreaId(Integer areaId) {
+        List<Counselor> sysAdminCounselorList = counselorMapper.getCounselorListByAreaId(areaId);
+        if (sysAdminCounselorList.isEmpty()){
+            throw new BusinessException(ErrorCode.NULL_ERROR,"该领域下暂无咨询师");
+        }
+        return ResultUtils.success(sysAdminCounselorList);
     }
 }

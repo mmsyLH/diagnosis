@@ -4,8 +4,10 @@ import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.SysUser;
 import asia.lhweb.diagnosis.model.dto.SysUserDTO;
 import asia.lhweb.diagnosis.model.vo.LoginUserVO;
+import asia.lhweb.diagnosis.model.vo.SysUserStatisticsVO;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 
 /**
 * @author Administrator
@@ -41,5 +43,20 @@ public interface SysUserService {
      */
     LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
 
+    /**
+     * 页面
+     *
+     * @param sysUserDTO 系统用户dto
+     * @return {@link PageResult}<{@link SysUser}>
+     */
     PageResult<SysUser> page(SysUserDTO sysUserDTO);
+
+    /**
+     * 获取用户统计信息
+     *
+     * @param begin 开始
+     * @param end   结束
+     * @return {@link SysUserStatisticsVO}
+     */
+    SysUserStatisticsVO getUserStatistics(LocalDate begin, LocalDate end);
 }

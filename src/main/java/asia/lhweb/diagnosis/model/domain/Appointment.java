@@ -1,15 +1,17 @@
 package asia.lhweb.diagnosis.model.domain;
 
+import asia.lhweb.diagnosis.model.PageRequest;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 预约表
  * @TableName appointment
  */
 @Data
-public class Appointment implements Serializable {
+public class Appointment extends PageRequest implements Serializable {
     /**
      * 预约表id
      */
@@ -33,12 +35,12 @@ public class Appointment implements Serializable {
     /**
      * 预约时间例如 2024:04:28
      */
-    private Date appointmentDate;
+    private String appointmentDate;
 
     /**
      * 预约时间段
      */
-    private Date appointmentTime;
+    private String appointmentTime;
 
     /**
      * 预约的问题描述
@@ -63,7 +65,7 @@ public class Appointment implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 更新时间

@@ -19,7 +19,7 @@ public interface SysLogMapper {
     SysLog selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(SysLog record);
-
+    
     int updateByPrimaryKey(SysLog record);
 
 }

@@ -47,7 +47,7 @@ public class MenuTreeUtil {
         for (SysMenuLeftVO sysMenuLeftVO : allMenuTree) {
             // 将复制后的元素添加到新列表
             allMenuTreeCopy.add(copyMenu(sysMenuLeftVO));
-        }
+    }
         return allMenuTreeCopy;
     }
 

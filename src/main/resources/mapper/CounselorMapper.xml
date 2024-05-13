@@ -50,10 +50,23 @@
             and is_delete = 0
         </where>
     </select>
+    <select id="getCounselorListByAreaId" resultType="asia.lhweb.diagnosis.model.domain.Counselor">
+        select
+            c.id,counselor_name,admin_id,
+            school,educationLv,Introduction,
+            background,create_time,update_time,
+            c.is_delete
+        from counselor c
+        left join sys_admin_counselor sac on c.id=sac.counselor_id
+        left join area a on sac.area_id = a.id
+        where a.id = #{areaId}
+        and c.is_delete = 0
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from counselor where
-                                  id = #{id,jdbcType=INTEGER}
+        delete
+        from counselor
+        where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.Counselor"
             useGeneratedKeys="true">

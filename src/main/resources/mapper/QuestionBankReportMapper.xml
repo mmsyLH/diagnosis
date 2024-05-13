@@ -7,14 +7,14 @@
     <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.QuestionBankReport">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
-            <result property="areaId" column="area_id" jdbcType="INTEGER"/>
+            <result property="questionBankId" column="question_bank_id" jdbcType="INTEGER"/>
             <result property="result" column="result" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="isDetele" column="is_detele" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_id,area_id,
+        id,user_id,question_bank_id,
         result,create_time,is_detele
     </sql>
 
@@ -31,10 +31,10 @@
     </delete>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBankReport" useGeneratedKeys="true">
         insert into question_bank_report
-        ( id,user_id,area_id
+        ( id,user_id,question_bank_id
         ,result,create_time,is_detele
         )
-        values (#{id,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{areaId,jdbcType=INTEGER}
+        values (#{id,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{questionBankId,jdbcType=INTEGER}
         ,#{result,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{isDetele,jdbcType=INTEGER}
         )
     </insert>
@@ -43,7 +43,7 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
                 <if test="userId != null">user_id,</if>
-                <if test="areaId != null">area_id,</if>
+                <if test="questionBankId != null">question_bank_id,</if>
                 <if test="result != null">result,</if>
                 <if test="createTime != null">create_time,</if>
                 <if test="isDetele != null">is_detele,</if>
@@ -51,7 +51,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="id != null">#{id,jdbcType=INTEGER},</if>
                 <if test="userId != null">#{userId,jdbcType=INTEGER},</if>
-                <if test="areaId != null">#{areaId,jdbcType=INTEGER},</if>
+                <if test="questionBankId != null">#{questionBankId,jdbcType=INTEGER},</if>
                 <if test="result != null">#{result,jdbcType=VARCHAR},</if>
                 <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
                 <if test="isDetele != null">#{isDetele,jdbcType=INTEGER},</if>
@@ -63,8 +63,8 @@
                 <if test="userId != null">
                     user_id = #{userId,jdbcType=INTEGER},
                 </if>
-                <if test="areaId != null">
-                    area_id = #{areaId,jdbcType=INTEGER},
+                <if test="questionBankId != null">
+                    question_bank_id = #{questionBankId,jdbcType=INTEGER},
                 </if>
                 <if test="result != null">
                     result = #{result,jdbcType=VARCHAR},
@@ -82,7 +82,7 @@
         update question_bank_report
         set 
             user_id =  #{userId,jdbcType=INTEGER},
-            area_id =  #{areaId,jdbcType=INTEGER},
+            question_bank_id =  #{questionBankId,jdbcType=INTEGER},
             result =  #{result,jdbcType=VARCHAR},
             create_time =  #{createTime,jdbcType=TIMESTAMP},
             is_detele =  #{isDetele,jdbcType=INTEGER}

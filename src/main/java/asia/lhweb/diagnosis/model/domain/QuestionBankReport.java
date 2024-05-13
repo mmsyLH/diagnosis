@@ -23,7 +23,7 @@ public class QuestionBankReport implements Serializable {
     /**
      * 领域id
      */
-    private Integer areaId;
+    private Integer questionBankId;
 
     /**
      * 做题实际结果

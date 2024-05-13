@@ -48,72 +48,12 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="WorkSchedule" />
-                  <option name="tableName" value="work_schedule" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="TransactionUser" />
-                  <option name="tableName" value="transaction_user" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="TransactionCounselor" />
-                  <option name="tableName" value="transaction_counselor" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="SysRoleMenu" />
-                  <option name="tableName" value="sys_role_menu" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="SysRole" />
-                  <option name="tableName" value="sys_role" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="SysMenu" />
-                  <option name="tableName" value="sys_menu" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="SysLog" />
-                  <option name="tableName" value="sys_log" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="SysDict" />
-                  <option name="tableName" value="sys_dict" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="SysAdminCounselor" />
-                  <option name="tableName" value="sys_admin_counselor" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="SysAdmin" />
-                  <option name="tableName" value="sys_admin" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="QuestionBankReport" />
-                  <option name="tableName" value="question_bank_report" />
-                </TableUIInfo>
-                <TableUIInfo>
                   <option name="className" value="QuestionBank" />
                   <option name="tableName" value="question_bank" />
                 </TableUIInfo>
                 <TableUIInfo>
-                  <option name="className" value="Diagnosis" />
-                  <option name="tableName" value="diagnosis" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="Counselor" />
-                  <option name="tableName" value="counselor" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="Comment" />
-                  <option name="tableName" value="comment" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="Area" />
-                  <option name="tableName" value="area" />
-                </TableUIInfo>
-                <TableUIInfo>
-                  <option name="className" value="Appointment" />
-                  <option name="tableName" value="appointment" />
+                  <option name="className" value="QuestionBankReport" />
+                  <option name="tableName" value="question_bank_report" />
                 </TableUIInfo>
               </list>
             </option>

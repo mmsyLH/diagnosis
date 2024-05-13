@@ -23,4 +23,24 @@ public interface SysMenuService{
     List<SysMenuLeftVO> selectFalseTrueByAdminId(Integer adminId);
 
     HashMap<String, List<SysMenuLeftVO>> selectMenuTreeByRoleId(Integer roleId);
+
+    /**
+     * 更新
+     *
+     * @param sysMenuLeftVO 系统菜单左键
+     * @return {@link Boolean}
+     */
+    Boolean update(SysMenuLeftVO sysMenuLeftVO);
+
+    /**
+     * 更新状态
+     *
+     * @param sysMenuLeftVO 系统菜单左键
+     * @return {@link Boolean}
+     */
+    Boolean updateStatus(SysMenuLeftVO sysMenuLeftVO);
+
+    Boolean add(SysMenuLeftVO sysMenuLeftVO);
+
+    Boolean deleteMenuById(Integer id);
 }
