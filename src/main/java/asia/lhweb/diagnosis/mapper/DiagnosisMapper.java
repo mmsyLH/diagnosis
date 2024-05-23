@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.Diagnosis;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author Administrator
@@ -22,4 +23,5 @@ public interface DiagnosisMapper {
 
     int updateByPrimaryKey(Diagnosis record);
 
+    Diagnosis selectByUserIdAndAppointmentId(@Param("userId") Integer userId, @Param("appointmentId") Integer appointmentId);
 }

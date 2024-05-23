@@ -96,6 +96,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.32" />
           <element id="library" level="project" name="Maven: com.alipay.sdk:alipay-sdk-java:3.1.0" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.1.1" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.9.4" />
         </element>
       </element>
       <element id="directory" name="META-INF">

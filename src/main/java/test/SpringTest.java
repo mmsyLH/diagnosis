@@ -13,7 +13,10 @@ public class SpringTest {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-ioc.xml");
         Object sysUserService = applicationContext.getBean("sysUserServiceImpl");
         System.out.println(sysUserService);
-
-
+        //
+        // short s1=1;
+        // s1=s1+1;
+        // s1+=1;
     }
+
 }

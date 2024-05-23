@@ -5,16 +5,16 @@
 <mapper namespace="asia.lhweb.diagnosis.mapper.TransactionUserMapper">
 
     <resultMap id="BaseResultMap" type="asia.lhweb.diagnosis.model.domain.TransactionUser">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="transactionId" column="transaction_id" jdbcType="VARCHAR"/>
-            <result property="userId" column="user_id" jdbcType="INTEGER"/>
-            <result property="transactionType" column="transaction_type" jdbcType="INTEGER"/>
-            <result property="money" column="money" jdbcType="DOUBLE"/>
-            <result property="transactionStatus" column="transaction_status" jdbcType="INTEGER"/>
-            <result property="payChannel" column="pay_channel" jdbcType="INTEGER"/>
-            <result property="transactionInfo" column="transaction_info" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="transactionId" column="transaction_id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="transactionType" column="transaction_type" jdbcType="INTEGER"/>
+        <result property="money" column="money" jdbcType="DOUBLE"/>
+        <result property="transactionStatus" column="transaction_status" jdbcType="INTEGER"/>
+        <result property="payChannel" column="pay_channel" jdbcType="INTEGER"/>
+        <result property="transactionInfo" column="transaction_info" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -26,98 +26,122 @@
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from transaction_user
-        where  id = #{id,jdbcType=INTEGER} 
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAllIf" resultType="asia.lhweb.diagnosis.model.domain.TransactionUser">
+        select tu.id,
+               tu.transaction_id,
+               tu.user_id,
+               tu.admin_id,
+               tu.transaction_type,
+               tu.money,
+               tu.transaction_status,
+               tu.pay_channel,
+               tu.transaction_info,
+               tu.create_time,
+               c.counselor_name
+        from transaction_user tu
+                 left join sys_admin sa on tu.admin_id = sa.id
+                 left join counselor c on sa.id = c.admin_id
+            and tu.is_delete = 0
+            and sa.is_delete = 0
+            and c.is_delete = 0
+        order by tu.create_time desc
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from transaction_user
-        where  id = #{id,jdbcType=INTEGER} 
+        delete
+        from transaction_user
+        where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.TransactionUser" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="asia.lhweb.diagnosis.model.domain.TransactionUser" useGeneratedKeys="true">
         insert into transaction_user
-        ( id,transaction_id,user_id
-        ,transaction_type,money,transaction_status
-        ,pay_channel,transaction_info,create_time
-        ,is_delete)
-        values (#{id,jdbcType=INTEGER},#{transactionId,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER}
-        ,#{transactionType,jdbcType=INTEGER},#{money,jdbcType=DOUBLE},#{transactionStatus,jdbcType=INTEGER}
-        ,#{payChannel,jdbcType=INTEGER},#{transactionInfo,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}
-        ,#{isDelete,jdbcType=INTEGER})
+        ( id, transaction_id, user_id
+        , transaction_type, money, transaction_status
+        , pay_channel, transaction_info, create_time
+        , is_delete)
+        values ( #{id,jdbcType=INTEGER}, #{transactionId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+               , #{transactionType,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, #{transactionStatus,jdbcType=INTEGER}
+               , #{payChannel,jdbcType=INTEGER}, #{transactionInfo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+               , #{isDelete,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.TransactionUser" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="asia.lhweb.diagnosis.model.domain.TransactionUser" useGeneratedKeys="true">
         insert into transaction_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="id != null">id,</if>
-                <if test="transactionId != null">transaction_id,</if>
-                <if test="userId != null">user_id,</if>
-                <if test="transactionType != null">transaction_type,</if>
-                <if test="money != null">money,</if>
-                <if test="transactionStatus != null">transaction_status,</if>
-                <if test="payChannel != null">pay_channel,</if>
-                <if test="transactionInfo != null">transaction_info,</if>
-                <if test="createTime != null">create_time,</if>
-                <if test="isDelete != null">is_delete,</if>
+            <if test="id != null">id,</if>
+            <if test="transactionId != null">transaction_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="adminId != null">admin_id,</if>
+            <if test="transactionType != null">transaction_type,</if>
+            <if test="money != null">money,</if>
+            <if test="transactionStatus != null">transaction_status,</if>
+            <if test="payChannel != null">pay_channel,</if>
+            <if test="transactionInfo != null">transaction_info,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="isDelete != null">is_delete,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="id != null">#{id,jdbcType=INTEGER},</if>
-                <if test="transactionId != null">#{transactionId,jdbcType=VARCHAR},</if>
-                <if test="userId != null">#{userId,jdbcType=INTEGER},</if>
-                <if test="transactionType != null">#{transactionType,jdbcType=INTEGER},</if>
-                <if test="money != null">#{money,jdbcType=DOUBLE},</if>
-                <if test="transactionStatus != null">#{transactionStatus,jdbcType=INTEGER},</if>
-                <if test="payChannel != null">#{payChannel,jdbcType=INTEGER},</if>
-                <if test="transactionInfo != null">#{transactionInfo,jdbcType=VARCHAR},</if>
-                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
-                <if test="isDelete != null">#{isDelete,jdbcType=INTEGER},</if>
+            <if test="id != null">#{id,jdbcType=INTEGER},</if>
+            <if test="transactionId != null">#{transactionId,jdbcType=VARCHAR},</if>
+            <if test="userId != null">#{userId,jdbcType=INTEGER},</if>
+            <if test="adminId != null">#{adminId,jdbcType=INTEGER},</if>
+            <if test="transactionType != null">#{transactionType,jdbcType=INTEGER},</if>
+            <if test="money != null">#{money,jdbcType=DOUBLE},</if>
+            <if test="transactionStatus != null">#{transactionStatus,jdbcType=INTEGER},</if>
+            <if test="payChannel != null">#{payChannel,jdbcType=INTEGER},</if>
+            <if test="transactionInfo != null">#{transactionInfo,jdbcType=VARCHAR},</if>
+            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+            <if test="isDelete != null">#{isDelete,jdbcType=INTEGER},</if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.TransactionUser">
         update transaction_user
         <set>
-                <if test="transactionId != null">
-                    transaction_id = #{transactionId,jdbcType=VARCHAR},
-                </if>
-                <if test="userId != null">
-                    user_id = #{userId,jdbcType=INTEGER},
-                </if>
-                <if test="transactionType != null">
-                    transaction_type = #{transactionType,jdbcType=INTEGER},
-                </if>
-                <if test="money != null">
-                    money = #{money,jdbcType=DOUBLE},
-                </if>
-                <if test="transactionStatus != null">
-                    transaction_status = #{transactionStatus,jdbcType=INTEGER},
-                </if>
-                <if test="payChannel != null">
-                    pay_channel = #{payChannel,jdbcType=INTEGER},
-                </if>
-                <if test="transactionInfo != null">
-                    transaction_info = #{transactionInfo,jdbcType=VARCHAR},
-                </if>
-                <if test="createTime != null">
-                    create_time = #{createTime,jdbcType=TIMESTAMP},
-                </if>
-                <if test="isDelete != null">
-                    is_delete = #{isDelete,jdbcType=INTEGER},
-                </if>
+            <if test="transactionId != null">
+                transaction_id = #{transactionId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="transactionType != null">
+                transaction_type = #{transactionType,jdbcType=INTEGER},
+            </if>
+            <if test="money != null">
+                money = #{money,jdbcType=DOUBLE},
+            </if>
+            <if test="transactionStatus != null">
+                transaction_status = #{transactionStatus,jdbcType=INTEGER},
+            </if>
+            <if test="payChannel != null">
+                pay_channel = #{payChannel,jdbcType=INTEGER},
+            </if>
+            <if test="transactionInfo != null">
+                transaction_info = #{transactionInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
         </set>
-        where   id = #{id,jdbcType=INTEGER} 
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="asia.lhweb.diagnosis.model.domain.TransactionUser">
         update transaction_user
-        set 
-            transaction_id =  #{transactionId,jdbcType=VARCHAR},
-            user_id =  #{userId,jdbcType=INTEGER},
-            transaction_type =  #{transactionType,jdbcType=INTEGER},
-            money =  #{money,jdbcType=DOUBLE},
-            transaction_status =  #{transactionStatus,jdbcType=INTEGER},
-            pay_channel =  #{payChannel,jdbcType=INTEGER},
-            transaction_info =  #{transactionInfo,jdbcType=VARCHAR},
-            create_time =  #{createTime,jdbcType=TIMESTAMP},
-            is_delete =  #{isDelete,jdbcType=INTEGER}
-        where   id = #{id,jdbcType=INTEGER} 
+        set transaction_id     = #{transactionId,jdbcType=VARCHAR},
+            user_id            = #{userId,jdbcType=INTEGER},
+            transaction_type   = #{transactionType,jdbcType=INTEGER},
+            money              = #{money,jdbcType=DOUBLE},
+            transaction_status = #{transactionStatus,jdbcType=INTEGER},
+            pay_channel        = #{payChannel,jdbcType=INTEGER},
+            transaction_info   = #{transactionInfo,jdbcType=VARCHAR},
+            create_time        = #{createTime,jdbcType=TIMESTAMP},
+            is_delete          = #{isDelete,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

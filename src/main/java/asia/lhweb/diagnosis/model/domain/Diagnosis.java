@@ -3,7 +3,6 @@ package asia.lhweb.diagnosis.model.domain;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 诊断表
@@ -15,6 +14,19 @@ public class Diagnosis implements Serializable {
      * 诊断表id
      */
     private Integer id;
+
+    /**
+     * 辅导员id
+     */
+    private Integer counselorId;
+    /**
+     * 钱
+     */
+    private Double price;
+    /**
+     * 任命状态
+     */
+    private Integer appointmentStatus;
 
     /**
      * 用户id
@@ -39,7 +51,7 @@ public class Diagnosis implements Serializable {
     /**
      * 诊断时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 0未删除 1已删除

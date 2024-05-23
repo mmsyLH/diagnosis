@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.SysAdmin;
+import asia.lhweb.diagnosis.model.domain.SysAdminUser;
 import asia.lhweb.diagnosis.model.dto.SysAdminDTO;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +30,16 @@ public interface SysAdminMapper {
 
     Page<SysAdmin> selectAllIf(SysAdminDTO sysAdminDTO);
 
+    Page<SysAdminUser> selectSysAdminUserIf(SysAdminUser sysAdminUser);
+
+
+    SysAdmin selectOneByActive(SysAdmin sysAdmin);
+
+    /**
+     * 添加金钱
+     *
+     * @param sysAdmin 系统管理员
+     * @return int
+     */
+    int addBalance(SysAdmin sysAdmin);
 }

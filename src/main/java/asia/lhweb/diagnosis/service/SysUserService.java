@@ -59,4 +59,46 @@ public interface SysUserService {
      * @return {@link SysUserStatisticsVO}
      */
     SysUserStatisticsVO getUserStatistics(LocalDate begin, LocalDate end);
+
+    /**
+     * 用户注册
+     *
+     * @param sysUser 系统用户
+     * @return int
+     */
+    int userRegister(SysUser sysUser);
+
+    /**
+     * 获取登录用户vo
+     *
+     * @param request 请求
+     * @return {@link LoginUserVO}
+     */
+    LoginUserVO getLoginUserVO(HttpServletRequest request);
+
+    /**
+     * @param sysUser
+     * @return int
+     */
+    int updateUser(SysUser sysUser);
+
+    /**
+     * 更新头像url
+     *
+     * @param userId    用户id
+     * @param avatarUrl
+     * @return {@link Boolean}
+     */
+    Boolean updateAvatarUrl(Integer userId, String avatarUrl);
+
+
+    /**
+     * 添加钱
+     *
+     * @param userId     用户id
+     * @param money      钱
+     * @param outTradeNo 我们贸易号
+     * @return {@link Boolean}
+     */
+    Boolean addMoney(Integer userId, Double money, String outTradeNo);
 }

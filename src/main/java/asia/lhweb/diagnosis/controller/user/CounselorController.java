@@ -6,9 +6,9 @@ import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.model.domain.Appointment;
 import asia.lhweb.diagnosis.model.domain.Area;
-import asia.lhweb.diagnosis.model.domain.Counselor;
 import asia.lhweb.diagnosis.model.domain.WorkSchedule;
 import asia.lhweb.diagnosis.model.dto.WorkScheduleDTO;
+import asia.lhweb.diagnosis.model.vo.CounselorVO;
 import asia.lhweb.diagnosis.service.AppointmentService;
 import asia.lhweb.diagnosis.service.AreaService;
 import asia.lhweb.diagnosis.service.CounselorService;
@@ -56,7 +56,7 @@ public class CounselorController {
      */
     @GetMapping("/getCounselorListByAreaId")
     @ApiOperation("获取咨询师领域列表")
-    public BaseResponse<List<Counselor>> getCounselorListByAreaId(Integer areaId) {
+    public BaseResponse<List<CounselorVO>> getCounselorListByAreaId(Integer areaId) {
         if (areaId == null){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -85,5 +85,11 @@ public class CounselorController {
     @ApiOperation("添加预约")
     public BaseResponse<Boolean> addAppointment(@RequestBody Appointment appointment) {
         return ResultUtils.success(appointmentService.addAppointment(appointment));
+    }
+    //getInfoById
+    @GetMapping("/getInfoById")
+    @ApiOperation("根据id获取咨询师信息")
+    public BaseResponse<CounselorVO> getInfoById(Integer id) {
+        return ResultUtils.success(counselorService.getInfoById(id));
     }
 }

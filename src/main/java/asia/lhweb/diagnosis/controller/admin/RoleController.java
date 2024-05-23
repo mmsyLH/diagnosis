@@ -1,8 +1,10 @@
 package asia.lhweb.diagnosis.controller.admin;
 
+import asia.lhweb.diagnosis.annotation.Log;
 import asia.lhweb.diagnosis.common.BaseResponse;
 import asia.lhweb.diagnosis.common.ResultUtils;
 import asia.lhweb.diagnosis.common.enums.ErrorCode;
+import asia.lhweb.diagnosis.common.enums.OperatorType;
 import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.SysRole;
@@ -38,6 +40,7 @@ public class RoleController {
      * @return {@link BaseResponse}<{@link Boolean}>
      */
     @PostMapping(value = "/delete")
+    @Log( businessType= "删除", operatorType = OperatorType.ADMIN)
     @ApiOperation("根据管理员id和菜单id删除权限")
     public BaseResponse<Boolean> deleteRoleByRoleIdAndMenuId(@RequestBody AddAndDelRoleDTO delRoleDTO, HttpServletRequest request) {
         Integer roleId = delRoleDTO.getRoleId();
@@ -62,6 +65,7 @@ public class RoleController {
      *
      * @return {@link BaseResponse}<{@link Boolean}>
      */
+    @Log( businessType= "添加", operatorType = OperatorType.ADMIN)
     @PostMapping(value = "/add")
     @ApiOperation("根据管理员id和菜单id添加权限")
     public BaseResponse<Boolean> addRoleByRoleIdAndMenuId(@RequestBody AddAndDelRoleDTO addRoleDTO, HttpServletRequest request) {

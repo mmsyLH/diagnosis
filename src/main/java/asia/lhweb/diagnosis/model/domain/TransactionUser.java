@@ -1,15 +1,16 @@
 package asia.lhweb.diagnosis.model.domain;
 
-import java.io.Serializable;
-import java.util.Date;
+import asia.lhweb.diagnosis.model.PageRequest;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 账单流水表
  * @TableName transaction_user
  */
 @Data
-public class TransactionUser implements Serializable {
+public class TransactionUser extends PageRequest implements Serializable {
     /**
      * 账单流水Id
      */
@@ -24,7 +25,14 @@ public class TransactionUser implements Serializable {
      * 用户Id
      */
     private Integer userId;
-
+    /**
+     * 管理员id
+     */
+    private Integer adminId;
+    /**
+     * 顾问名字
+     */
+    private String counselorName;
     /**
      * 流水类型 1充值 2消费
      */
@@ -53,7 +61,7 @@ public class TransactionUser implements Serializable {
     /**
      * 交易时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 0未删除 1已删除

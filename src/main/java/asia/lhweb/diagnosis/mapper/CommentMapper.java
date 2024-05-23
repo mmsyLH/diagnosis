@@ -1,6 +1,10 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.Comment;
+import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -22,4 +26,13 @@ public interface CommentMapper {
 
     int updateByPrimaryKey(Comment record);
 
+    Page<Comment> selectAllIf(Comment comment);
+
+    List<Comment> selectListByCounselorId(Integer counselorId);
+
+    List<Comment> selectListByCounselorIdAndUserId(@Param("counselorId") Integer counselorId, @Param("userId") Integer userId);
+
+    List<Comment> getCommentsByCounselorId(@Param("counselorId") Integer counselorId);
+
+    List<Comment> selectListByCounselorIdAndUserIdAndAppointmentId(@Param("counselorId") Integer counselorId, @Param("userId") Integer userId, @Param("appointmentId") Integer appointmentId);
 }

@@ -1,15 +1,16 @@
 package asia.lhweb.diagnosis.model.domain;
 
-import java.io.Serializable;
-import java.util.Date;
+import asia.lhweb.diagnosis.model.PageRequest;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 题库表
  * @TableName question_bank
  */
 @Data
-public class QuestionBank implements Serializable {
+public class QuestionBank extends PageRequest implements Serializable {
     /**
      * 题库表id
      */
@@ -28,7 +29,7 @@ public class QuestionBank implements Serializable {
     /**
      * 题库描述
      */
-    private String questioninfo;
+    private String questionInfo;
 
     /**
      * 题目json字符串
@@ -43,17 +44,17 @@ public class QuestionBank implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private String updateTime;
 
     /**
      * 0未删除 1已删除
      */
-    private Integer isDetele;
+    private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
 }

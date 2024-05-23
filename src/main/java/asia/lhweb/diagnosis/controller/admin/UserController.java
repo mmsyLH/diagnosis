@@ -1,7 +1,11 @@
 package asia.lhweb.diagnosis.controller.admin;
 
+import asia.lhweb.diagnosis.annotation.Log;
 import asia.lhweb.diagnosis.common.BaseResponse;
 import asia.lhweb.diagnosis.common.ResultUtils;
+import asia.lhweb.diagnosis.common.enums.ErrorCode;
+import asia.lhweb.diagnosis.common.enums.OperatorType;
+import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.SysUser;
 import asia.lhweb.diagnosis.model.dto.SysUserDTO;
@@ -11,10 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.time.LocalDate;
@@ -65,6 +66,7 @@ public class UserController {
 
     @GetMapping("/delete")
     @ApiOperation("删除用户")
+    @Log( businessType= "删除", operatorType = OperatorType.ADMIN)
     public BaseResponse<Boolean> deleteById(@RequestParam("id") Integer id) {
         boolean res = userService.deleteById(id);
         return ResultUtils.success(res);
@@ -85,5 +87,40 @@ public class UserController {
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
         SysUserStatisticsVO sysUserStatisticsVO = userService.getUserStatistics(begin, end);
         return ResultUtils.success(sysUserStatisticsVO);
+    }
+
+    /**
+     * 更新用户
+     *
+     * @param sysUser 系统用户
+     * @return {@link BaseResponse}<{@link Integer}>
+     */
+    @ApiOperation("更新用户信息")
+    @PostMapping("/update")
+    @Log( businessType= "更新", operatorType = OperatorType.ADMIN)
+    public BaseResponse<Boolean> updateUser(@RequestBody SysUser sysUser) {
+        if (sysUser == null) {
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+        int res = userService.updateUser(sysUser);
+        if (res <= 0){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        }
+        return ResultUtils.success(true);
+    }
+    /**
+     * 用户添加
+     *
+     * @param sysUser 系统用户
+     * @return {@link BaseResponse}<{@link Integer}>
+     */
+    @ApiOperation("用户添加")
+    @PostMapping("/add")
+    public BaseResponse<Integer> userAdd(@RequestBody SysUser sysUser) {
+        if (sysUser == null) {
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+        int res = userService.userRegister(sysUser);
+        return ResultUtils.success(res);
     }
 }

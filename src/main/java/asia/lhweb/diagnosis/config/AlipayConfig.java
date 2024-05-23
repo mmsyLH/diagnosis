@@ -32,12 +32,13 @@ public class AlipayConfig {
     /**
      * 服务器异步通知页面路径需http://格式的完整路径，不能加?id=123这类自定义参数
      */
-    private String notifyUrl = "http://localhost:8092/#/success";
+    private String notifyUrl = "http://lhweb.asia:8080/diagnosis/pay/notify";
 
     /**
      * 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数
      */
-    private String returnUrl = "http://localhost:8092/#/success";
+    private String returnUrl = "http://lhweb.asia:8080/diagnosis-user-front/#/success";
+    // private String returnUrl = "http://localhost:8091/#/success";
 
     /**
      * 签名方式

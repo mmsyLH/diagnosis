@@ -32,4 +32,7 @@ public interface WorkScheduleMapper {
 
     WorkSchedule selectByWorkScheduleSelective(WorkSchedule workSchedule);
 
+    Integer updateBySelective(WorkSchedule workSchedule);
+
+    Integer updateStatus(WorkSchedule workSchedule);
 }

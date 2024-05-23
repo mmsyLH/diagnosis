@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.model.dto;
 
 import asia.lhweb.diagnosis.model.PageRequest;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.Date;
  * @TableName sys_admin
  */
 @Data
+@ApiModel(value="系统后台")
 public class SysAdminDTO  extends PageRequest implements Serializable{
 
     /**

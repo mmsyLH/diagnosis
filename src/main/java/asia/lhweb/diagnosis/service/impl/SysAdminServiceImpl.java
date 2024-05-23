@@ -5,9 +5,12 @@ import asia.lhweb.diagnosis.common.enums.ErrorCode;
 import asia.lhweb.diagnosis.constant.AdminConstant;
 import asia.lhweb.diagnosis.constant.BaseConstant;
 import asia.lhweb.diagnosis.exception.BusinessException;
+import asia.lhweb.diagnosis.mapper.CounselorMapper;
 import asia.lhweb.diagnosis.mapper.SysAdminMapper;
 import asia.lhweb.diagnosis.model.PageResult;
+import asia.lhweb.diagnosis.model.domain.Counselor;
 import asia.lhweb.diagnosis.model.domain.SysAdmin;
+import asia.lhweb.diagnosis.model.domain.SysAdminUser;
 import asia.lhweb.diagnosis.model.dto.SysAdminDTO;
 import asia.lhweb.diagnosis.model.vo.LoginAdminVO;
 import asia.lhweb.diagnosis.service.SysAdminService;
@@ -16,7 +19,9 @@ import asia.lhweb.diagnosis.utils.cache.RedisCacheUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.jsonwebtoken.Claims;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
@@ -42,6 +47,8 @@ public class SysAdminServiceImpl
 
     @Resource
     private RedisCacheUtil redisCacheUtil;
+    @Resource
+    private CounselorMapper counselorMapper;
 
     @Override
     public LoginAdminVO adminLogin(String sysAccount, String sysPassword, HttpServletRequest request) {
@@ -69,12 +76,26 @@ public class SysAdminServiceImpl
 
         // 查询用户是否存在
         SysAdmin loginSysAdmin = sysAdminMapper.selectOne(sysAccount, encryptPassword);
+
         // 用户不存在
         if (loginSysAdmin == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "账号或者密码错误 ");
         }
+
+        if (loginSysAdmin.getAdminRoleId()!=3&&loginSysAdmin.getStatus()!=1){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "您的账户已被禁用。请联系超级管理员");
+        }
+
         // 3 脱敏
         LoginAdminVO cleanAdmin = getSafetyAdmin(loginSysAdmin);
+
+        // 3.5补全信息
+        Integer id = cleanAdmin.getId();
+        Counselor counselor= counselorMapper.selectOneByAdminId(id);
+        if (counselor!=null){
+            cleanAdmin.setCounselorName(counselor.getCounselorName());
+            cleanAdmin.setCounselorID(counselor.getId());
+        }
 
         // 4 token
         String token = createToken(cleanAdmin);
@@ -121,8 +142,8 @@ public class SysAdminServiceImpl
      * @param request
      * @return token
      */
-    private String getToken(HttpServletRequest request) {
-        String token = request.getHeader(BaseConstant.TOKEN_NAME);
+    private String getAdminToken(HttpServletRequest request) {
+        String token = request.getHeader(BaseConstant.ADMIN_TOKEN_NAME);
         if (!StringUtils.hasText(token)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "令牌不能为空");
         }
@@ -145,6 +166,7 @@ public class SysAdminServiceImpl
         loginAdminVO.setCreateTime(sysAdmin.getCreateTime());
         loginAdminVO.setPhone(sysAdmin.getPhone());
         loginAdminVO.setAdminRoleId(sysAdmin.getAdminRoleId());
+        loginAdminVO.setMoney(sysAdmin.getMoney());
         return loginAdminVO;
     }
 
@@ -166,33 +188,57 @@ public class SysAdminServiceImpl
 
     @Override
     public LoginAdminVO getLoginAdminVO(HttpServletRequest request) {
-        String token = request.getHeader(BaseConstant.TOKEN_NAME);
-        if (token == null || "".equals(token)) {
+        if (request == null) {
+            throw new BusinessException(ErrorCode.NOT_LOGIN, "请求为空");
+        }
+
+        String token = request.getHeader(BaseConstant.ADMIN_TOKEN_NAME);
+        if (!StringUtils.hasLength(token)) {
             throw new BusinessException(ErrorCode.NOT_LOGIN, "token为空");
         }
-        LoginAdminVO tokenInRedis;
+
+        LoginAdminVO loginAdminVO;
         try {
             Claims claims = JwtUtil.parseJWT(token);
             System.err.println(claims);
             String adminAccount = claims.get("sysAccount", String.class);
-            if (!redisCacheUtil.hasKey(String.format(BaseConstant.REDIS_ADMIN_KEY_FORMAT, adminAccount))) {
+            String redisKey = String.format(BaseConstant.REDIS_ADMIN_KEY_FORMAT, adminAccount);
+            if (!redisCacheUtil.hasKey(redisKey)) {
                 throw new BusinessException(ErrorCode.NOT_LOGIN, "Token验证失败或已过期，请重新登录！");
             }
-            tokenInRedis = redisCacheUtil.getCacheObject(String.format(BaseConstant.REDIS_ADMIN_KEY_FORMAT, adminAccount));
-            if (tokenInRedis == null) {
+
+            // 获取缓存中的管理员信息
+            loginAdminVO = redisCacheUtil.getCacheObject(redisKey);
+            if (loginAdminVO == null) {
                 throw new BusinessException(ErrorCode.NOT_LOGIN, "Token验证失败或已过期，请重新登录！");
             }
-            String redisToken = tokenInRedis.getToken();
+
+            // 校验Token是否一致
+            String redisToken = loginAdminVO.getToken();
             if (!token.equals(redisToken)) {
                 throw new BusinessException(ErrorCode.NOT_LOGIN, "Token验证失败或已过期，请重新登录！");
             }
-        } catch (Exception e) {// 说明解密失败 客户端返回信息
+
+            // 从数据库获取管理员信息，确保数据最新
+            SysAdmin sysAdmin = sysAdminMapper.selectByPrimaryKey(Long.valueOf(loginAdminVO.getId()));
+            if (sysAdmin == null) {
+                throw new BusinessException(ErrorCode.NOT_LOGIN, "管理员信息不存在");
+            }
+
+            // 更新安全的管理员信息
+            loginAdminVO = getSafetyAdmin(sysAdmin);
+            loginAdminVO.setToken(token);
+            // 更新缓存中的管理员信息
+            redisCacheUtil.setCacheObject(redisKey, loginAdminVO, BaseConstant.REDIS_EXPIRATION_TIME, TimeUnit.SECONDS);
+
+        } catch (Exception e) {
             e.printStackTrace();
             throw new BusinessException(ErrorCode.NOT_LOGIN, "Token验证失败或已过期，请重新登录！");
         }
 
-        return tokenInRedis;
+        return loginAdminVO;
     }
+
 
     /**
      * 判断当前用户是否是超级管理员
@@ -237,6 +283,182 @@ public class SysAdminServiceImpl
         pageResult.setItems(adminPage.getResult());
         pageResult.setPageTotalCount(adminPage.getPages());
         return pageResult;
+    }
+
+    /**
+     * Admin用户页面
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return {@link PageResult}<{@link SysAdminUser}>
+     */
+    @Override
+    public PageResult<SysAdminUser> adminUserPage(SysAdminUser sysAdminUser) {
+        int pageNo = sysAdminUser.getPageNo();
+        int pageSize = sysAdminUser.getPageSize();
+        PageHelper.startPage(pageNo, pageSize);
+        // 紧跟着的第一个select方法会被分页
+        System.err.println(sysAdminUser);
+        Page<SysAdminUser> sysAdminUserPage = sysAdminMapper.selectSysAdminUserIf(sysAdminUser);
+        if (sysAdminUserPage == null || sysAdminUserPage.getResult().size() == 0) {
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+        PageResult<SysAdminUser> pageResult = new PageResult<>();
+        pageResult.setPageNo(pageNo);
+        pageResult.setPageSize(pageSize);
+        pageResult.setTotalRow((int) sysAdminUserPage.getTotal());
+        pageResult.setItems(sysAdminUserPage.getResult());
+        pageResult.setPageTotalCount(sysAdminUserPage.getPages());
+        return pageResult;
+    }
+
+    /**
+     * 添加管理
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return int
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int addAdmin(SysAdminUser sysAdminUser) {
+        if (sysAdminUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        SysAdmin sysAdmin = new SysAdmin();
+        BeanUtils.copyProperties(sysAdminUser, sysAdmin);
+        //查询账户是否已经存在
+        SysAdmin sysAdmin2 = new SysAdmin();
+        sysAdmin2.setSysAccount(sysAdmin.getSysAccount());
+        SysAdmin sysAdmin1 = sysAdminMapper.selectOneByActive(sysAdmin2);
+        if (sysAdmin1!=null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"账户已经存在");
+        }
+        //md5加密加盐
+        String encryptPassword = DigestUtils.md5DigestAsHex((BaseConstant.SALT + sysAdmin.getSysPassword()).getBytes());
+        sysAdmin.setSysPassword(encryptPassword);
+        int res = sysAdminMapper.insert(sysAdmin);
+        if (res <=0) {
+          throw  new BusinessException(ErrorCode.SYSTEM_ERROR,"添加管理员错误");
+        }
+        return res;
+    }
+
+    /**
+     * 添加咨询师
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return int
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int addAdminAndCounselor(SysAdminUser sysAdminUser) {
+        if (sysAdminUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        SysAdmin sysAdmin = new SysAdmin();
+        BeanUtils.copyProperties(sysAdminUser, sysAdmin);
+        //查询账户是否已经存在
+        SysAdmin sysAdmin2 = new SysAdmin();
+        sysAdmin2.setSysAccount(sysAdmin.getSysAccount());
+        SysAdmin sysAdmin1 = sysAdminMapper.selectOneByActive(sysAdmin2);
+        if (sysAdmin1!=null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"咨询师账户已经存在");
+        }
+        //md5加密加盐
+        String encryptPassword = DigestUtils.md5DigestAsHex((BaseConstant.SALT + sysAdmin.getSysPassword()).getBytes());
+        sysAdmin.setSysPassword(encryptPassword);
+        int res = sysAdminMapper.insert(sysAdmin);
+        if (res <=0) {
+            throw  new BusinessException(ErrorCode.SYSTEM_ERROR,"添加咨询师错误");
+        }
+
+        Counselor counselor = new Counselor();
+        BeanUtils.copyProperties(sysAdminUser, counselor);
+        counselor.setCounselorName(sysAdminUser.getAdminName());
+        counselor.setEducationlv(sysAdminUser.getEducationLv());
+        counselor.setAdminId(sysAdmin.getId());
+        int insertRes2 = counselorMapper.insert(counselor);
+        if (insertRes2 <=0) {
+            throw  new BusinessException(ErrorCode.SYSTEM_ERROR,"添加咨询师错误");
+        }
+        return insertRes2;
+    }
+
+    /**
+     * 更新状态
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return int
+     */
+    @Override
+    public int updateStatus(SysAdminUser sysAdminUser) {
+        if (sysAdminUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        SysAdmin sysAdmin1 = new SysAdmin();
+        sysAdmin1.setId(sysAdminUser.getId());
+        SysAdmin sysAdmin2 = sysAdminMapper.selectOneByActive(sysAdmin1);
+        if (sysAdmin2 == null){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR,"用户不存在");
+
+
+        }
+        sysAdmin2.setStatus(sysAdminUser.getStatus());
+        int res = sysAdminMapper.updateByPrimaryKeySelective(sysAdmin2);
+        if (res >0) {
+            return res;
+        }
+        return 0;
+    }
+
+    /**
+     * 重置密码
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return int
+     */
+    @Override
+    public int resetPassword(SysAdminUser sysAdminUser) {
+        if (sysAdminUser == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        if (sysAdminUser.getId() == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        if (sysAdminUser.getSysPassword() == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        SysAdmin sysAdmin = new SysAdmin();
+        sysAdmin.setId(sysAdminUser.getId());
+        SysAdmin sysAdmin1 = sysAdminMapper.selectOneByActive(sysAdmin);
+        if (sysAdmin1 == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //设置密码为加密后的密码
+        String encryptPassword = DigestUtils.md5DigestAsHex((BaseConstant.SALT + sysAdminUser.getSysPassword()).getBytes());
+        sysAdmin1.setSysPassword(encryptPassword);
+        int res = sysAdminMapper.updateByPrimaryKeySelective(sysAdmin1);
+        if (res <=0) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        }
+        return res;
+    }
+
+    /**
+     * 删除
+     *
+     * @param id id
+     * @return int
+     */
+    @Override
+    public int delete(Integer id) {
+        if (id == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        if (sysAdminMapper.deleteByPrimaryKey(Long.valueOf(id)) <=0) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        }
+        return 1;
     }
 
 }

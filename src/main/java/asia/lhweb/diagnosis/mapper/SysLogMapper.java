@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.SysLog;
+import com.github.pagehelper.Page;
 
 /**
 * @author Administrator
@@ -22,4 +23,5 @@ public interface SysLogMapper {
     
     int updateByPrimaryKey(SysLog record);
 
+    Page<SysLog> selectAllIf(SysLog sysLog);
 }

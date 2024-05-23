@@ -1,5 +1,6 @@
 package asia.lhweb.diagnosis.model.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @TableName sys_user
  */
 @Data
+@ApiModel(value="系统用户表")
 public class LoginAdminDTO implements Serializable {
     /**
      * 系统用户账户

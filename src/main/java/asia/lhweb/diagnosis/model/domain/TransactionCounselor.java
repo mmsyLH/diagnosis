@@ -1,19 +1,29 @@
 package asia.lhweb.diagnosis.model.domain;
 
+import asia.lhweb.diagnosis.model.PageRequest;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 账单流水表
  * @TableName transaction_counselor
  */
 @Data
-public class TransactionCounselor implements Serializable {
+public class TransactionCounselor extends PageRequest implements Serializable {
     /**
      * 账单流水Id
      */
     private Integer id;
+    /**
+     * 用户id
+     */
+    private Integer userId;
+    /**
+     * 用户名
+     */
+    private String userName;
 
     /**
      * 流水号

@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.TransactionUser;
+import com.github.pagehelper.Page;
 
 /**
 * @author Administrator
@@ -22,4 +23,5 @@ public interface TransactionUserMapper {
 
     int updateByPrimaryKey(TransactionUser record);
 
+    Page<TransactionUser> selectAllIf(TransactionUser transactionUser);
 }

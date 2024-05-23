@@ -14,6 +14,7 @@ import asia.lhweb.diagnosis.service.SysRoleService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -101,9 +102,11 @@ public class SysRoleServiceImpl
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean deleteRoleByRoleIdAndMenuId(List<Integer> menuIds, Integer roleId) {
         // 3、通过查询的权限和menuIdS去进行删除对应的权限
         int res= sysRoleMenuMapper.deleteRoleByRouleIdAndMenuIdS(menuIds, roleId);
+        //System.out.println(1/0);
         if (res<=0){
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "删除权限失败");
         }
@@ -111,6 +114,7 @@ public class SysRoleServiceImpl
     }
 
     @Override
+
     public boolean addRoleByRoleIdAndMenuId(List<Integer> menuIds, Integer roleId) {
         // 2、查询添加的菜单是否每个都存在
         menuIds.forEach(menuId -> {

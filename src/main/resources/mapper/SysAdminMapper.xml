@@ -12,6 +12,7 @@
         <result property="adminRoleId" column="admin_role_id" jdbcType="INTEGER"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="money" column="money" jdbcType="DOUBLE"/>
         <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
@@ -19,7 +20,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,sys_account,sys_password,
+        id,sys_account,sys_password,money
         admin_name,admin_role_id,status,
         phone,avatar,create_time,
         update_time,is_delete
@@ -27,13 +28,18 @@
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+            id, sys_account, sys_password, money,
+            admin_name, admin_role_id, status,
+            phone, avatar, create_time, update_time, is_delete
         from sys_admin
         where id = #{id,jdbcType=INTEGER}
     </select>
+
     <select id="selectOne" resultType="asia.lhweb.diagnosis.model.domain.SysAdmin">
         select
-        <include refid="Base_Column_List"/>
+            id, sys_account, sys_password, money,
+            admin_name, admin_role_id, status,
+            phone, avatar, create_time, update_time, is_delete
         from sys_admin
         where sys_account = #{sysAccount}
         and sys_password = #{sysPassword}
@@ -56,9 +62,65 @@
             <if test="adminRoleId != null">
                 and admin_role_id = #{adminRoleId}
             </if>
-                and is_delete = 0
+            and is_delete = 0
         </where>
 
+    </select>
+    <select id="selectSysAdminUserIf" resultType="asia.lhweb.diagnosis.model.domain.SysAdminUser">
+        SELECT
+        a.id,
+        a.sys_account,
+        a.sys_password,
+        a.admin_name,
+        a.admin_role_id,
+        a.status,
+        a.phone,
+        a.avatar,
+        a.create_time,
+        a.update_time,
+        a.is_delete,
+        r.sys_role_name AS roleName,
+        c.school,
+        c.educationLv,
+        c.introduction,
+        c.background
+        FROM
+        sys_admin a
+        JOIN sys_role r ON a.admin_role_id = r.sys_role_id
+        <!-- 动态调整LEFT JOIN条件，仅当adminRoleId不为1时，才限制c.is_delete -->
+        <if test="adminRoleId != 1">
+            LEFT JOIN counselor c ON a.id = c.admin_id AND c.is_delete = 0
+        </if>
+        <if test="adminRoleId == 1">
+            LEFT JOIN counselor c ON a.id = c.admin_id
+        </if>
+        WHERE
+        a.is_delete = 0
+        <if test="adminRoleId != null and adminRoleId != ''">
+            AND r.sys_role_id = #{adminRoleId}
+        </if>
+        ORDER BY a.admin_name
+    </select>
+    <select id="selectOneByActive" resultType="asia.lhweb.diagnosis.model.domain.SysAdmin">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_admin
+        <where>
+
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="sysAccount != null">
+                and sys_account = #{sysAccount}
+            </if>
+            <if test="sysPassword != null">
+                and sys_password = #{sysPassword}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            and is_delete = 0
+        </where>
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -70,13 +132,11 @@
             useGeneratedKeys="true">
         insert into sys_admin
         ( id, sys_account, sys_password
-        , admin_name, admin_role_id, status
-        , phone, avatar, create_time
-        , update_time, is_delete)
+        , admin_name, admin_role_id
+        , phone)
         values ( #{id,jdbcType=INTEGER}, #{sysAccount,jdbcType=VARCHAR}, #{sysPassword,jdbcType=VARCHAR}
-               , #{adminName,jdbcType=VARCHAR}, #{adminRoleId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
-               , #{phone,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-               , #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER})
+               , #{adminName,jdbcType=VARCHAR}, #{adminRoleId,jdbcType=INTEGER}
+               , #{phone,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
             parameterType="asia.lhweb.diagnosis.model.domain.SysAdmin" useGeneratedKeys="true">
@@ -87,12 +147,7 @@
             <if test="sysPassword != null">sys_password,</if>
             <if test="adminName != null">admin_name,</if>
             <if test="adminRoleId != null">admin_role_id,</if>
-            <if test="status != null">status,</if>
             <if test="phone != null">phone,</if>
-            <if test="avatar != null">avatar,</if>
-            <if test="createTime != null">create_time,</if>
-            <if test="updateTime != null">update_time,</if>
-            <if test="isDelete != null">is_delete,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id,jdbcType=INTEGER},</if>
@@ -100,13 +155,13 @@
             <if test="sysPassword != null">#{sysPassword,jdbcType=VARCHAR},</if>
             <if test="adminName != null">#{adminName,jdbcType=VARCHAR},</if>
             <if test="adminRoleId != null">#{adminRoleId,jdbcType=INTEGER},</if>
-            <if test="status != null">#{status,jdbcType=INTEGER},</if>
             <if test="phone != null">#{phone,jdbcType=VARCHAR},</if>
-            <if test="avatar != null">#{avatar,jdbcType=VARCHAR},</if>
-            <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
-            <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
-            <if test="isDelete != null">#{isDelete,jdbcType=INTEGER},</if>
         </trim>
+    </insert>
+    <insert id="addBalance">
+        update sys_admin
+        set money = money + #{money}
+        where id = #{id}
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.SysAdmin">
         update sys_admin

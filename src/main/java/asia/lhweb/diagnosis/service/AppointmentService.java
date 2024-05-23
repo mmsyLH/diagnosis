@@ -5,7 +5,10 @@ import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.Appointment;
 import asia.lhweb.diagnosis.model.domain.WorkSchedule;
 import asia.lhweb.diagnosis.model.dto.WorkScheduleDTO;
+import asia.lhweb.diagnosis.model.vo.AppointmentVO;
+import asia.lhweb.diagnosis.model.vo.CounselorAppointmentStatisticsVO;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,4 +42,37 @@ public interface AppointmentService{
      * @return {@link BaseResponse}<{@link PageResult}<{@link Appointment}>>
      */
     BaseResponse<PageResult<Appointment>> getAppointmentList(Appointment appointment);
+
+    /**
+     * 删除
+     *
+     * @param id id
+     * @return {@link BaseResponse}<{@link Boolean}>
+     */
+    BaseResponse<Boolean> delete(Integer id);
+
+    /**
+     * 更新约会
+     *
+     * @param appointment 任命
+     * @return {@link Boolean}
+     */
+    Boolean updateAppointment(Appointment appointment);
+
+    /**
+     * 通过id获取约会信息
+     *
+     * @param id id
+     * @return {@link BaseResponse}<{@link AppointmentVO}>
+     */
+    BaseResponse<AppointmentVO> getAppointmentInfoById(Integer id);
+
+    /**
+     * 获取预约统计信息
+     *
+     * @param begin 开始
+     * @param end   结束
+     * @return {@link CounselorAppointmentStatisticsVO}
+     */
+    CounselorAppointmentStatisticsVO getAppointmentStatistics(LocalDate begin, LocalDate end);
 }

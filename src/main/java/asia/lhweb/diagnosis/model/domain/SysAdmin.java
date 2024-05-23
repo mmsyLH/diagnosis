@@ -21,6 +21,11 @@ public class SysAdmin implements Serializable {
     private String sysAccount;
 
     /**
+     * 钱
+     */
+    private Double money;
+
+    /**
      * 系统管理员密码
      */
     private String sysPassword;

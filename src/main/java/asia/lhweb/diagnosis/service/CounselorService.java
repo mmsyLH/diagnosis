@@ -6,6 +6,7 @@ import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.Counselor;
 import asia.lhweb.diagnosis.model.dto.CounselorDTO;
 import asia.lhweb.diagnosis.model.vo.CounselorAppointmentStatisticsVO;
+import asia.lhweb.diagnosis.model.vo.CounselorVO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -48,5 +49,21 @@ public interface CounselorService {
      * @param areaId 区域id
      * @return {@link BaseResponse}<{@link List}<{@link Counselor}>>
      */
-    BaseResponse<List<Counselor>> getCounselorListByAreaId(Integer areaId);
+    BaseResponse<List<CounselorVO>> getCounselorListByAreaId(Integer areaId);
+
+    /**
+     * 通过admin id获取辅导员
+     *
+     * @param adminId 管理员id
+     * @return {@link Counselor}
+     */
+    Counselor getCounselorByAdminId(Integer adminId);
+
+    /**
+     * 按id获取信息
+     *
+     * @param id id
+     * @return {@link CounselorVO}
+     */
+    CounselorVO getInfoById(Integer id);
 }

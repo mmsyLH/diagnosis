@@ -37,4 +37,8 @@ public interface SysUserMapper {
     Page<SysUser> selectAllIf(SysUserDTO sysUserDTO);
 
     Integer countNewUsersByDateRange(@Param("beginTime") LocalDateTime beginTime, @Param("endTime") LocalDateTime endTime);
+
+    String selectByUserAccount(String userAccount);
+
+    Integer deductBalance(@Param("userId") Integer userId, @Param("price") Double price);
 }

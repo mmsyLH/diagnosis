@@ -15,7 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Administrator
@@ -139,6 +142,7 @@ public class SysMenuServiceImpl
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
+
     public Boolean update(SysMenuLeftVO sysMenuLeftVO) {
         if (sysMenuLeftVO.getId() == null || sysMenuLeftVO.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "id不能为空");
@@ -148,12 +152,12 @@ public class SysMenuServiceImpl
             throw new BusinessException(ErrorCode.NULL_ERROR, "id不存在");
         }
         BeanUtils.copyProperties(sysMenuLeftVO, sysMenu);
-        if (sysMenuMapper.selectByMenuName(sysMenu.getMenuName()) != null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "菜单名称已存在");
-        }
-        if (sysMenuMapper.selectByMenuPath(sysMenu.getMenuPath()) != null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "路径已存在");
-        }
+        // if (sysMenuMapper.selectByMenuName(sysMenu.getMenuName()) != null) {
+        //     throw new BusinessException(ErrorCode.PARAMS_ERROR, "菜单名称已存在");
+        // }
+        // if (sysMenuMapper.selectByMenuPath(sysMenu.getMenuPath()) != null) {
+        //     throw new BusinessException(ErrorCode.PARAMS_ERROR, "路径已存在");
+        // }
 
         // if (sysMenuMapper.selectByMenuComponent(sysMenu.getMenuComponent()) != null) {
         //     throw new BusinessException(ErrorCode.PARAMS_ERROR, "组件已存在");

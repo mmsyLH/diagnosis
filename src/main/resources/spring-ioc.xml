@@ -37,16 +37,24 @@
         <!--         使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->
         <mvc:interceptor>
             <!-- 进行拦截：/**表示拦截所有controller -->
-            <mvc:mapping path="/**" />
+            <!--<mvc:mapping path="/**" />-->
+            <mvc:mapping path="/admin/**" />
             <!-- 不进行拦截 -->
             <mvc:exclude-mapping path="/admin/admin/login" />
-            <mvc:exclude-mapping path="/common/getCode" />
-            <mvc:exclude-mapping path="/text/**" />
-            <mvc:exclude-mapping path="/swagger-ui.html" />
-            <mvc:exclude-mapping path="/webjars/**" />
-            <mvc:exclude-mapping path="/swagger-resources/**"/>
-            <mvc:exclude-mapping path="/v2/api-docs"/>
-            <bean class="asia.lhweb.diagnosis.interceptor.LoginInterceptor" />
+            <!--<mvc:exclude-mapping path="/common/getCode" />-->
+            <!--<mvc:exclude-mapping path="/text/**" />-->
+            <!--<mvc:exclude-mapping path="/swagger-ui.html" />-->
+            <!--<mvc:exclude-mapping path="/webjars/**" />-->
+            <!--<mvc:exclude-mapping path="/swagger-resources/**"/>-->
+            <!--<mvc:exclude-mapping path="/v2/api-docs"/>-->
+            <bean class="asia.lhweb.diagnosis.interceptor.AdminLoginInterceptor" />
+        </mvc:interceptor>
+    <!--    拦截用户-->
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**" />
+            <mvc:exclude-mapping path="/user/user/login" />
+            <mvc:exclude-mapping path="/user/user/register" />
+            <bean class="asia.lhweb.diagnosis.interceptor.UserLoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 

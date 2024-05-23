@@ -1,7 +1,13 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.Appointment;
+import asia.lhweb.diagnosis.model.vo.AppointmentVO;
 import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Param;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author Administrator
@@ -24,4 +30,8 @@ public interface AppointmentMapper {
     int updateByPrimaryKey(Appointment record);
 
     Page<Appointment> selectAppointmentList(Appointment appointment);
+
+    AppointmentVO getAppointmentInfoById(@Param("id") Integer id);
+
+    List<Map<String, Object>> countAppointmentsByCounselorAndDateRange(@Param("beginTime") LocalDateTime beginTime, @Param("endTime") LocalDateTime endTime);
 }

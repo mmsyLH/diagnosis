@@ -13,6 +13,8 @@ import java.util.Date;
 @Data
 public class LoginUserVO implements Serializable {
 
+    private Integer id;
+
     /**
      * 系统用户账户
      */
@@ -73,7 +75,8 @@ public class LoginUserVO implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private Date updateTime;
 
-    
+    @ApiModelProperty(value = "用户令牌")
+    private String token;
 
     private static final long serialVersionUID = 1L;
 }

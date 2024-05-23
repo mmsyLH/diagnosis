@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author :罗汉
  * @date : 2024/4/24
  */
-public class LoginInterceptor implements HandlerInterceptor {
+public class AdminLoginInterceptor implements HandlerInterceptor {
     @Resource
     private RedisCacheUtil redisCacheUtil;
     @Resource
@@ -35,13 +35,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         String token = null;
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (BaseConstant.TOKEN_NAME.equals(cookie.getName())) {
+                if (BaseConstant.ADMIN_TOKEN_NAME.equals(cookie.getName())) {
                     token = cookie.getValue();
                 }
             }
         }
         if (token == null){
-            token= request.getHeader(BaseConstant.TOKEN_NAME);
+            token= request.getHeader(BaseConstant.ADMIN_TOKEN_NAME);
         }
         if (token == null || "".equals(token)) {
             response.getWriter().write(JSON.toJSONString(Result.error("token为空")));
@@ -53,22 +53,22 @@ public class LoginInterceptor implements HandlerInterceptor {
             System.err.println(claims);
             String adminAccount = claims.get("sysAccount", String.class);
             if (!redisCacheUtil.hasKey(String.format(BaseConstant.REDIS_ADMIN_KEY_FORMAT, adminAccount))) {
-                response.getWriter().write(JSON.toJSONString(Result.error(403,"Token验证失败或已过期，请重新登录！")));
+                response.getWriter().write(JSON.toJSONString(Result.error(40100,"Token验证失败或已过期，请重新登录！")));
                 return false;
             }
             tokenInRedis = redisCacheUtil.getCacheObject(String.format(BaseConstant.REDIS_ADMIN_KEY_FORMAT, adminAccount));
             if (tokenInRedis == null) {
-                response.getWriter().write(JSON.toJSONString(Result.error(403,"Token验证失败或已过期，请重新登录！")));
+                response.getWriter().write(JSON.toJSONString(Result.error(40100,"Token验证失败或已过期，请重新登录！")));
                 return false;
             }
             String redisToken = tokenInRedis.getToken();
             if (!token.equals(redisToken)) {
-                response.getWriter().write(JSON.toJSONString(Result.error(403,"Token验证失败或已过期，请重新登录！")));
+                response.getWriter().write(JSON.toJSONString(Result.error(40100,"Token验证失败或已过期，请重新登录！")));
                 return false;
             }
         } catch (Exception e) {// 说明解密失败 客户端返回信息
             e.printStackTrace();
-            response.getWriter().write(JSON.toJSONString(Result.error(403,"Token验证失败或已过期，请重新登录！")));
+            response.getWriter().write(JSON.toJSONString(Result.error(40100,"Token验证失败或已过期，请重新登录！")));
             return false;
         }
         // 放行

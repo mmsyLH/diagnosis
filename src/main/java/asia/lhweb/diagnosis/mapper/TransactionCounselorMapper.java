@@ -1,6 +1,8 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.TransactionCounselor;
+import asia.lhweb.diagnosis.model.vo.TransactionCounselorVO;
+import com.github.pagehelper.Page;
 
 /**
 * @author Administrator
@@ -22,4 +24,5 @@ public interface TransactionCounselorMapper {
 
     int updateByPrimaryKey(TransactionCounselor record);
 
+    Page<TransactionCounselorVO> selectAll(TransactionCounselor transactionCounselor);
 }

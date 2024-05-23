@@ -18,11 +18,22 @@ public class LoginAdminVO implements Serializable {
      * 系统管理员账户
      */
     private String sysAccount;
+    private Double money;
+
+    /**
+     * 顾问名字
+     */
+    private String counselorName;
 
     /**
      * 系统管理员密码
      */
     private String sysPassword;
+
+    /**
+     * 辅导员id
+     */
+    private Integer counselorID;
 
     /**
      * 管理员姓名

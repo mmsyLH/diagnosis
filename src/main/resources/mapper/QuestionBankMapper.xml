@@ -8,18 +8,18 @@
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="areaId" column="area_id" jdbcType="INTEGER"/>
             <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="questioninfo" column="questionInfo" jdbcType="VARCHAR"/>
-            <result property="question" column="question" jdbcType="VARCHAR"/>
-            <result property="result" column="result" jdbcType="VARCHAR"/>
+            <result property="questionInfo" column="questionInfo" jdbcType="VARCHAR"/>
+            <result property="question" column="question" />
+            <result property="result" column="result" />
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="isDetele" column="is_detele" jdbcType="INTEGER"/>
+            <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,area_id,title,
         questionInfo,question,result,
-        create_time,update_time,is_detele
+        create_time,update_time,is_delete
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -28,6 +28,35 @@
         from question_bank
         where  id = #{id,jdbcType=INTEGER} 
     </select>
+    <select id="getQuestionList" resultType="asia.lhweb.diagnosis.model.domain.QuestionBank">
+        select
+        <include refid="Base_Column_List" />
+        from question_bank
+    </select>
+    <select id="selectAllIf" resultType="asia.lhweb.diagnosis.model.domain.QuestionBank">
+        select
+        <include refid="Base_Column_List" />
+        from question_bank
+        <where>
+            <if test="areaId != null">
+                AND area_id = #{areaId,jdbcType=INTEGER}
+            </if>
+            <if test="title != null">
+                AND title like concat('%',#{title,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="questionInfo != null">
+                AND questionInfo like concat('%',#{questionInfo,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="question != null">
+                AND question like concat('%',#{question,jdbcType=VARCHAR},'%')
+            </if>
+            AND is_delete = 0
+        </where>
+    </select>
+    <select id="getAreaName" resultType="java.lang.String">
+        select area_name from area where id = #{areaId,jdbcType=INTEGER}
+    </select>
+
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from question_bank
@@ -37,11 +66,11 @@
         insert into question_bank
         ( id,area_id,title
         ,questionInfo,question,result
-        ,create_time,update_time,is_detele
+        ,create_time,update_time
         )
         values (#{id,jdbcType=INTEGER},#{areaId,jdbcType=INTEGER},#{title,jdbcType=VARCHAR}
-        ,#{questioninfo,jdbcType=VARCHAR},#{question,jdbcType=VARCHAR},#{result,jdbcType=VARCHAR}
-        ,#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{isDetele,jdbcType=INTEGER}
+        ,#{questionInfo,jdbcType=VARCHAR},#{question,jdbcType=VARCHAR},#{result,jdbcType=VARCHAR}
+        ,#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}
         )
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBank" useGeneratedKeys="true">
@@ -50,23 +79,21 @@
                 <if test="id != null">id,</if>
                 <if test="areaId != null">area_id,</if>
                 <if test="title != null">title,</if>
-                <if test="questioninfo != null">questionInfo,</if>
+                <if test="questionInfo != null">questionInfo,</if>
                 <if test="question != null">question,</if>
                 <if test="result != null">result,</if>
                 <if test="createTime != null">create_time,</if>
                 <if test="updateTime != null">update_time,</if>
-                <if test="isDetele != null">is_detele,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="id != null">#{id,jdbcType=INTEGER},</if>
                 <if test="areaId != null">#{areaId,jdbcType=INTEGER},</if>
                 <if test="title != null">#{title,jdbcType=VARCHAR},</if>
-                <if test="questioninfo != null">#{questioninfo,jdbcType=VARCHAR},</if>
+                <if test="questionInfo != null">#{questionInfo,jdbcType=VARCHAR},</if>
                 <if test="question != null">#{question,jdbcType=VARCHAR},</if>
                 <if test="result != null">#{result,jdbcType=VARCHAR},</if>
                 <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
                 <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
-                <if test="isDetele != null">#{isDetele,jdbcType=INTEGER},</if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="asia.lhweb.diagnosis.model.domain.QuestionBank">
@@ -78,8 +105,8 @@
                 <if test="title != null">
                     title = #{title,jdbcType=VARCHAR},
                 </if>
-                <if test="questioninfo != null">
-                    questionInfo = #{questioninfo,jdbcType=VARCHAR},
+                <if test="questionInfo != null">
+                    questionInfo = #{questionInfo,jdbcType=VARCHAR},
                 </if>
                 <if test="question != null">
                     question = #{question,jdbcType=VARCHAR},
@@ -93,9 +120,6 @@
                 <if test="updateTime != null">
                     update_time = #{updateTime,jdbcType=TIMESTAMP},
                 </if>
-                <if test="isDetele != null">
-                    is_detele = #{isDetele,jdbcType=INTEGER},
-                </if>
         </set>
         where   id = #{id,jdbcType=INTEGER} 
     </update>
@@ -108,8 +132,7 @@
             question =  #{question,jdbcType=VARCHAR},
             result =  #{result,jdbcType=VARCHAR},
             create_time =  #{createTime,jdbcType=TIMESTAMP},
-            update_time =  #{updateTime,jdbcType=TIMESTAMP},
-            is_detele =  #{isDetele,jdbcType=INTEGER}
+            update_time =  #{updateTime,jdbcType=TIMESTAMP}
         where   id = #{id,jdbcType=INTEGER} 
     </update>
 </mapper>

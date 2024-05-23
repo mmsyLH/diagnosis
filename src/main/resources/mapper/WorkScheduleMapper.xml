@@ -116,4 +116,33 @@
             status =  #{status,jdbcType=INTEGER}
         where  
     </update>
+    <update id="updateBySelective">
+        update work_schedule
+        <set>
+            <if test="id != null">
+                id = #{id,jdbcType=INTEGER},
+            </if>
+            <if test="counselorId != null">
+                counselor_id = #{counselorId,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                date = #{date,jdbcType=DATE},
+            </if>
+            <if test="timeSlot != null">
+                time_slot = #{timeSlot,jdbcType=TIME},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+    </update>
+    <update id="updateStatus">
+        update work_schedule
+        set status = #{status,jdbcType=INTEGER}
+        <where>
+            and counselor_id = #{counselorId,jdbcType=INTEGER}
+            and date = #{date,jdbcType=DATE}
+            and time_slot = #{timeSlot,jdbcType=TIME}
+        </where>
+    </update>
 </mapper>

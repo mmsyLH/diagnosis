@@ -1,15 +1,17 @@
 package asia.lhweb.diagnosis.model.domain;
 
+import asia.lhweb.diagnosis.model.PageRequest;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 系统日志表
  * @TableName sys_log
  */
 @Data
-public class SysLog implements Serializable {
+public class SysLog extends PageRequest implements Serializable {
     /**
      * 日志id
      */

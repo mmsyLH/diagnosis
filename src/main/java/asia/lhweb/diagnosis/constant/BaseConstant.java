@@ -18,12 +18,13 @@ public interface BaseConstant {
 
     String CODE_KEY = "Diagnosis-Code";
     String REDIS_ADMIN_KEY_FORMAT = "diagnosis:admin:loginAdmin:%s";
-    String REDIS_USER_KEY_FORMAT = "diagnosis:user:loginAdmin:%s";
+    String REDIS_USER_KEY_FORMAT = "diagnosis:user:loginUser:%s";
     /**
      * 应用名称
      */
     String WEBAPP_NAME = "webapp";
-    String TOKEN_NAME = "Diagnosis-Token";
+    String ADMIN_TOKEN_NAME = "Diagnosis-ADMIN-Token";
+    String USER_TOKEN_NAME = "Diagnosis-USER-Token";
     /**
      * 最大请求大小
      */
@@ -69,4 +70,8 @@ public interface BaseConstant {
      * 超级管理员id
      */
     Integer SUPER_ADMIN_ID = 3;
+    /**
+     * Redis过期时间
+     */
+    Integer REDIS_EXPIRATION_TIME = 60*60*24*7;
 }

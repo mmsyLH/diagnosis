@@ -1,6 +1,9 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.QuestionBank;
+import com.github.pagehelper.Page;
+
+import java.util.List;
 
 /**
 * @author Administrator
@@ -22,4 +25,9 @@ public interface QuestionBankMapper {
 
     int updateByPrimaryKey(QuestionBank record);
 
+    List<QuestionBank> getQuestionList();
+
+    Page<QuestionBank> selectAllIf(QuestionBank questionBank);
+
+    String getAreaName(Integer areaId);
 }

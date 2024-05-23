@@ -51,6 +51,7 @@ public class CommonController {
     }
 
     @GetMapping(value = "/getCode", produces = "image/jpeg")
+    @ApiOperation("获取验证码")
     public void getCaptcha(HttpServletRequest request, HttpServletResponse response) {
         // 定义response输出类型为image/jpeg类型
         response.setDateHeader("Expires", 0);

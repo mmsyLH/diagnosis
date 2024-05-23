@@ -69,12 +69,18 @@
                 and age = #{age}
             </if>
             and is_delete=0
+            order by create_time desc
         </where>
     </select>
     <select id="countNewUsersByDateRange" resultType="java.lang.Integer">
         select count(*)
         from sys_user
         where create_time between #{beginTime} and #{endTime}
+    </select>
+    <select id="selectByUserAccount" resultType="java.lang.String">
+        select user_account
+        from sys_user
+        where id = #{id}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -193,5 +199,10 @@
             update_time   = #{updateTime,jdbcType=TIMESTAMP},
             is_delete     = #{isDelete,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="deductBalance">
+        update sys_user
+        set money = money - #{price}
+        where id = #{userId}
     </update>
 </mapper>

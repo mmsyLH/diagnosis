@@ -1,6 +1,7 @@
 package asia.lhweb.diagnosis.mapper;
 
 import asia.lhweb.diagnosis.model.domain.QuestionBankReport;
+import com.github.pagehelper.Page;
 
 /**
 * @author Administrator
@@ -22,4 +23,5 @@ public interface QuestionBankReportMapper {
 
     int updateByPrimaryKey(QuestionBankReport record);
 
+    Page<QuestionBankReport> selectAllIf(QuestionBankReport questionBankReport);
 }

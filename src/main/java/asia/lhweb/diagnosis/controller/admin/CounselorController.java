@@ -1,8 +1,10 @@
 package asia.lhweb.diagnosis.controller.admin;
 
+import asia.lhweb.diagnosis.annotation.Log;
 import asia.lhweb.diagnosis.common.BaseResponse;
 import asia.lhweb.diagnosis.common.ResultUtils;
 import asia.lhweb.diagnosis.common.enums.ErrorCode;
+import asia.lhweb.diagnosis.common.enums.OperatorType;
 import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.Counselor;
@@ -63,6 +65,7 @@ public class CounselorController {
      */
     @GetMapping ("/delete")
     @ApiOperation("删除")
+    @Log( businessType= "删除", operatorType = OperatorType.ADMIN)
     public BaseResponse<Boolean> deleteById(@RequestParam("id") Integer id) {
         if (id==null||id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "要删除的id有误");
@@ -108,6 +111,7 @@ public class CounselorController {
      */
     @GetMapping("/addSchedule")
     @ApiOperation("添加排班")
+    @Log( businessType= "添加", operatorType = OperatorType.ADMIN)
     public BaseResponse<Boolean> addSchedule(WorkSchedule workSchedule) {
         if (workSchedule == null){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -123,12 +127,18 @@ public class CounselorController {
      */
     @GetMapping("/deleteSchedule")
     @ApiOperation("删除排班")
+    @Log( businessType= "删除", operatorType = OperatorType.ADMIN)
     public BaseResponse<Boolean> deleteSchedule(WorkSchedule workSchedule) {
         if (workSchedule == null){
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         return workScheduleService.deleteSchedule(workSchedule);
     }
-
+    @GetMapping("/getCounselorByAdminId")
+    @ApiOperation("获取该管理员对应的咨询师")
+    public BaseResponse<Counselor> getCounselorByAdminId(Integer adminId) {
+        Counselor counselor = counselorService.getCounselorByAdminId(adminId);
+        return ResultUtils.success(counselor);
+    }
 
 }

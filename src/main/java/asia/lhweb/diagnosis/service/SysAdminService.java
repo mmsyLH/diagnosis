@@ -2,6 +2,7 @@ package asia.lhweb.diagnosis.service;
 
 import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.SysAdmin;
+import asia.lhweb.diagnosis.model.domain.SysAdminUser;
 import asia.lhweb.diagnosis.model.dto.SysAdminDTO;
 import asia.lhweb.diagnosis.model.vo.LoginAdminVO;
 
@@ -60,4 +61,46 @@ public interface SysAdminService {
      * @return {@link PageResult}<{@link SysAdmin}>
      */
     PageResult<SysAdmin> page(SysAdminDTO sysAdminDTO);
+
+    /**
+     * Admin用户页面
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return {@link PageResult}<{@link SysAdminUser}>
+     */
+    PageResult<SysAdminUser> adminUserPage(SysAdminUser sysAdminUser);
+
+    /**
+     * 添加管理
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return int
+     */
+    int addAdmin(SysAdminUser sysAdminUser);
+
+    int addAdminAndCounselor(SysAdminUser sysAdminUser);
+
+    /**
+     * 更新状态
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return int
+     */
+    int updateStatus(SysAdminUser sysAdminUser);
+
+    /**
+     * 重置密码
+     *
+     * @param sysAdminUser 系统管理员用户
+     * @return int
+     */
+    int resetPassword(SysAdminUser sysAdminUser);
+
+    /**
+     * 删除
+     *
+     * @param id id
+     * @return int
+     */
+    int delete(Integer id);
 }

@@ -1,9 +1,11 @@
 package asia.lhweb.diagnosis.controller.admin;
 
 
+import asia.lhweb.diagnosis.annotation.Log;
 import asia.lhweb.diagnosis.common.BaseResponse;
 import asia.lhweb.diagnosis.common.ResultUtils;
 import asia.lhweb.diagnosis.common.enums.ErrorCode;
+import asia.lhweb.diagnosis.common.enums.OperatorType;
 import asia.lhweb.diagnosis.constant.BaseConstant;
 import asia.lhweb.diagnosis.exception.BusinessException;
 import asia.lhweb.diagnosis.model.vo.LoginAdminVO;
@@ -129,6 +131,7 @@ public class MenuController {
      */// update
     @PostMapping(value = "/updateStatus")
     @ApiOperation("更新菜单")
+    @Log( businessType= "更新", operatorType = OperatorType.ADMIN)
     public BaseResponse<Boolean> updateStatus(@RequestBody SysMenuLeftVO sysMenuLeftVO, HttpServletRequest request) {
         // // 通过HttpServletRequest获取当前登录的管理员信息
         // LoginAdminVO loginAdminVO = sysAdminService.getLoginAdminVO(request);
@@ -148,6 +151,7 @@ public class MenuController {
      */// update
     @PostMapping(value = "/update")
     @ApiOperation("更新菜单")
+    @Log( businessType= "更新", operatorType = OperatorType.ADMIN)
     public BaseResponse<Boolean> update(@RequestBody SysMenuLeftVO sysMenuLeftVO, HttpServletRequest request) {
         // // 通过HttpServletRequest获取当前登录的管理员信息
         // LoginAdminVO loginAdminVO = sysAdminService.getLoginAdminVO(request);
@@ -168,6 +172,7 @@ public class MenuController {
      */
     @PostMapping(value = "/add")
     @ApiOperation("添加菜单")
+    @Log( businessType= "添加", operatorType = OperatorType.ADMIN)
     public BaseResponse<Boolean> add(@RequestBody SysMenuLeftVO sysMenuLeftVO, HttpServletRequest request) {
         // 通过HttpServletRequest获取当前登录的管理员信息
         // LoginAdminVO loginAdminVO = sysAdminService.getLoginAdminVO(request);
@@ -188,6 +193,7 @@ public class MenuController {
      */
     @GetMapping(value = "/delete")
     @ApiOperation("删除菜单")
+    @Log( businessType= "删除", operatorType = OperatorType.ADMIN)
     public BaseResponse<Boolean> deleteById(@RequestParam("id") Integer id, HttpServletRequest request) {
         // 通过HttpServletRequest获取当前登录的管理员信息
         // LoginAdminVO loginAdminVO = sysAdminService.getLoginAdminVO(request);

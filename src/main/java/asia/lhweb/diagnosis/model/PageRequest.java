@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 public class PageRequest implements Serializable {
-    private int pageSize=10;
+    private int pageSize=8;
     private int pageNo=1;
     private static final long serialVersionUID = 1L;
 }

@@ -1,15 +1,16 @@
 package asia.lhweb.diagnosis.model.domain;
 
-import java.io.Serializable;
-import java.util.Date;
+import asia.lhweb.diagnosis.model.PageRequest;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 题库报告表
  * @TableName question_bank_report
  */
 @Data
-public class QuestionBankReport implements Serializable {
+public class QuestionBankReport extends PageRequest implements Serializable {
     /**
      * 题库报告表id
      */
@@ -19,6 +20,10 @@ public class QuestionBankReport implements Serializable {
      * 用户id
      */
     private Integer userId;
+    /**
+     * 分数
+     */
+    private Integer score;
 
     /**
      * 领域id
@@ -33,12 +38,12 @@ public class QuestionBankReport implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 0未删除 1删除
      */
-    private Integer isDetele;
+    private Integer isDelete;
 
     private static final long serialVersionUID = 1L;
 }

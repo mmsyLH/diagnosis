@@ -3,6 +3,7 @@ package asia.lhweb.diagnosis.mapper;
 import asia.lhweb.diagnosis.annotation.MyEntity;
 import asia.lhweb.diagnosis.model.domain.Counselor;
 import asia.lhweb.diagnosis.model.dto.CounselorDTO;
+import asia.lhweb.diagnosis.model.vo.CounselorVO;
 import com.github.pagehelper.Page;
 
 import java.util.List;
@@ -31,4 +32,12 @@ public interface CounselorMapper {
     Page<Counselor> selectAllIf(CounselorDTO counselorDTO);
 
     List<Counselor> getCounselorListByAreaId(Integer areaId);
+
+    List<CounselorVO> getCounselorVOListByAreaId(Integer areaId);
+
+    Counselor selectOneByAdminId(Integer id);
+
+    // Integer addBalance(@Param("counselorId") Integer counselorId,@Param("price") Double price);
+
+    CounselorVO getInfoById(Integer id);
 }

@@ -11,6 +11,7 @@ import asia.lhweb.diagnosis.model.PageResult;
 import asia.lhweb.diagnosis.model.domain.Counselor;
 import asia.lhweb.diagnosis.model.dto.CounselorDTO;
 import asia.lhweb.diagnosis.model.vo.CounselorAppointmentStatisticsVO;
+import asia.lhweb.diagnosis.model.vo.CounselorVO;
 import asia.lhweb.diagnosis.service.CounselorService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -65,6 +66,7 @@ implements CounselorService{
      * @return boolean
      */
     @Override
+
     public boolean deleteById(int id) {
         return counselorMapper.deleteByPrimaryKey((long) id) > 0;
     }
@@ -88,11 +90,44 @@ implements CounselorService{
      * @return {@link BaseResponse}<{@link List}<{@link Counselor}>>
      */
     @Override
-    public BaseResponse<List<Counselor>> getCounselorListByAreaId(Integer areaId) {
-        List<Counselor> sysAdminCounselorList = counselorMapper.getCounselorListByAreaId(areaId);
-        if (sysAdminCounselorList.isEmpty()){
+    public BaseResponse<List<CounselorVO>> getCounselorListByAreaId(Integer areaId) {
+        List<CounselorVO> counselorVOList = counselorMapper.getCounselorVOListByAreaId(areaId);
+        if (counselorVOList.isEmpty()){
             throw new BusinessException(ErrorCode.NULL_ERROR,"该领域下暂无咨询师");
         }
-        return ResultUtils.success(sysAdminCounselorList);
+        return ResultUtils.success(counselorVOList);
+    }
+
+    /**
+     * 通过admin id获取辅导员
+     *
+     * @param adminId 管理员id
+     * @return {@link Counselor}
+     */
+    @Override
+    public Counselor getCounselorByAdminId(Integer adminId) {
+        Counselor counselor = counselorMapper.selectOneByAdminId(adminId);
+        if (counselor == null){
+            throw new BusinessException(ErrorCode.NULL_ERROR);
+        }
+        return counselor;
+    }
+
+    /**
+     * 按id获取信息
+     *
+     * @param id id
+     * @return {@link CounselorVO}
+     */
+    @Override
+    public CounselorVO getInfoById(Integer id) {
+        if (id == null){
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        CounselorVO counselorVO = counselorMapper.getInfoById(id);
+        if (counselorVO == null){
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+        }
+        return counselorVO;
     }
 }

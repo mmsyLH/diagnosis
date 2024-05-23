@@ -16,7 +16,18 @@
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
     </resultMap>
-
+    <resultMap id="selectAllResultMap" type="asia.lhweb.diagnosis.model.domain.TransactionCounselor">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="transactionId" column="transaction_id" jdbcType="VARCHAR"/>
+        <result property="counselorId" column="counselor_id" jdbcType="INTEGER"/>
+        <result property="transactionType" column="transaction_type" jdbcType="INTEGER"/>
+        <result property="money" column="money" jdbcType="DOUBLE"/>
+        <result property="transactionStatus" column="transaction_status" jdbcType="INTEGER"/>
+        <result property="payChannel" column="pay_channel" jdbcType="INTEGER"/>
+        <result property="transactionInfo" column="transaction_info" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+    </resultMap>
     <sql id="Base_Column_List">
         id,transaction_id,counselor_id,
         transaction_type,money,transaction_status,
@@ -29,6 +40,16 @@
         <include refid="Base_Column_List" />
         from transaction_counselor
         where  id = #{id,jdbcType=INTEGER} 
+    </select>
+    <select id="selectAll" resultMap="selectAllResultMap">
+        select
+            tc.id,tc.transaction_id,tc.counselor_id,
+            tc.transaction_type,tc.money,tc.transaction_status,
+            tc.pay_channel,tc.transaction_info,tc.create_time,
+            tc.is_delete,su.user_name
+        from transaction_counselor tc
+        left join sys_user su on tc.user_id = su.id
+        where tc.is_delete = 0
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

@@ -93,4 +93,9 @@ public class TestController {
         }
         return ResultUtils.success("测试全局异常");
     }
+
+    public static void main(String[] args) {
+        System.out.println(System.getProperty("file.encoding"));
+        System.out.println("你好");
+    }
 }
